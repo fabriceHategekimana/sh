@@ -1,0 +1,12 @@
+#!/bin/bash
+# $1 filename
+
+filename=fiche.txt
+
+nbline=$(cat $filename | wc -l)
+
+for i in $(seq $nbline);
+do 
+	xdotool type "$(sed -n "${i}p" $filename)"
+	xdotool key ctrl+Return
+done

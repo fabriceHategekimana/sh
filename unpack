@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+#prendre la dernière extention
+extention=$(python3 -c "print('$1'.split('.')[-1])")
+
+echo $extention
+
+#Traitement des différents cas .zip .tar.gz .tar.xz .tar.bz2 .deb
+if [ "$extention" == "zip" ]; then
+	unzip $1	
+elif [ "$extention" == "gz" ]; then
+	tar -xzf $1
+elif [ "$extention" == "xz" ]; then
+	tar -xf $1
+elif [ "$extention" == "bz2" ]; then
+	tar -jxvf $1
+elif [ "$extention" == "tgz" ]; then
+	tar zxvf $1
+elif [ "$extention" == "deb" ]; then
+	sudo dpkg -i -R $1
+	sudo apt-get -f install
+elif [ "$extention" == "rar" ]; then
+	unrar x $1
+fi

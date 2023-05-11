@@ -1,0 +1,8 @@
+#!/bin/bash
+python3 ~/script/npredicat/predicat.py $1
+
+if [ -z "$1" ]; then
+	python3 ~/script/npredicat/cli.py
+else
+	python3 ~/script/npredicat/predicat.py $1
+fi

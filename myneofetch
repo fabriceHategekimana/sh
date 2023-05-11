@@ -1,0 +1,4 @@
+
+	#!/bin/bash
+	neofetch --kitty /home/fabrice/Images/background/abstrait00.jpg
+	

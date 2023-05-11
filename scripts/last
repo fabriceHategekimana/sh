@@ -1,0 +1,6 @@
+#!/bin/bash
+
+last_vid=$(ls -t ~/Vidéos/obs | head -n 1)
+
+vlc ~/Vidéos/obs/$last_vid
+

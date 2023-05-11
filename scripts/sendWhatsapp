@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# ouvrir whatsapp web 
+firefox -new-tab https://web.whatsapp.com/
+
+sleep 5
+
+# boucle dans le dossier messages
+cd /home/fabrice/sh/messages_whatsapp/
+touch AA
+for contact in $(ls);
+do
+	notify-send "$contact"
+	# chercher le contact "0x002f" stand for "/"
+	xdotool key ctrl+alt+0x002f
+	# prendre le nom du contact	
+	echo "$contact" | xclip -sel clip
+	# coller le contact et lancer la recherche
+	xdotool key ctrl+v
+	xdotool key Return
+	sleep 0.5
+
+	# copier le message dans le press papier
+	cat $contact | xclip -sel clip
+	# coller le message du presse papier
+	xdotool key ctrl+v
+	xdotool key Return
+
+	notify-send "Sended message to $contact"
+	# detruir le message maintenant qu'il est envoyé
+	rm $contact
+	sleep 3
+done
+
+# fermer whatsapp
+xdotool key ctrl+w
+

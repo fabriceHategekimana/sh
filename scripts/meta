@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://business.facebook.com/latest/home?nav_ref=bm_home_redirect&business_id=179554567818526&mio=0&asset_id=103835992438601 &
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+sujetsdintercession=~/sh/variables/intercession
+
+if [[ "$1" == "edit" ]]; then
+       vim $sujetsdintercession
+elif [[ "$1" == "add" ]]; then
+	  shift 
+      for element in $@;
+	  do
+		  echo "$element" >> $sujetsdintercession
+	  done
+fi

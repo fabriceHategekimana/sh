@@ -1,0 +1,21 @@
+#!/bin/bash
+if [ "$1" == "images" ]; then
+	nom="$(python3 ~/python/dialog.py).png"
+	import ~/rendu/$nom
+elif [ "$1" == "vim" ]; then
+	path=$(pwd)
+	parent=$(python3 -c "print('/'.join('$path'.split('/')[0:5]))")
+	import $parent/images/$2.png
+	echo "$parent/images/$2.png"
+elif [ "$1" == "direct" ];  then
+	nom="$(python3 -c 'print('hello')')"
+	import ~/temp/direct.png
+	feh ~/temp/direct.png
+elif [ "$1" == "-h" ]; then
+	echo"
+	blank	nothing append
+	image	move all png from Images to the actual directory (thi is for latex)
+	-h	show this help menu
+	"
+
+fi

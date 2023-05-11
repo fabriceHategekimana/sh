@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s gimp -n notebook
+tmux send-keys -t gimp 'vim /home/fabrice/sessions/projet/gimp/note.md' Enter

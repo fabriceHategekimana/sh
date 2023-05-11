@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s information_retrieval -n notebook
+tmux send-keys -t information_retrieval 'vim /home/fabrice/sessions/projet/information_retrieval/note.md' Enter

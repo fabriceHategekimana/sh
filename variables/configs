@@ -1,0 +1,14 @@
+i3 /home/fabrice/.config/i3/default
+zellij /home/fabrice/.config/zellij/config.kdl
+tmux /home/fabrice/.tmux.conf
+vim /home/fabrice/.vimrc
+nvim /home/fabrice/.config/nvim/init.vim
+bash /home/fabrice/.bashrc
+lf /home/fabrice/.config/lf/lfrc
+picom /home/fabrice/.config/picom/picom.conf
+rofi /home/fabrice/.config/rofi/config.rasi
+kitty /home/fabrice/.config/kitty/settings
+lsd /home/fabrice/.config/lsd/config.yaml
+zathura /home/fabrice/.config/zathura/zathurarc
+starship /home/fabrice/.config/starship.toml
+xdg /home/fabrice/.config

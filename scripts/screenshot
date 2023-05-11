@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#name=$(rofi -dmenu)
+
+import /home/fabrice/rendu/$1.png

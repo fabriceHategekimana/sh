@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s manim -n notebook
+tmux send-keys -t manim 'vim /home/fabrice/sessions/projet/manim/note.md' Enter

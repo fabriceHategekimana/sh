@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mkdir /home/fabrice/sessions/projet/$1
+
+cp /home/fabrice/note/templates/project.md /home/fabrice/sessions/projet/$1/note.md
+
+cp /home/fabrice/note/templates/layout /home/fabrice/sh/layout/$1
+chmod +x /home/fabrice/sh/layout/$1
+sed -i "s/PROJET/$1/g" /home/fabrice/sh/layout/$1
+
+# taskwarrior
+#task add project:$1 Écrire les premières tâches

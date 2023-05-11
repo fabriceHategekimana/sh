@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set_zathura_theme(){
+	echo "
+	# color
+	set recolor true
+	set recolor-lightcolor \\$(get_color "background")
+	set highlight-color "$(get_color "leadcolor")"
+	set highlight-active-color "$(get_color "leadcolor")"
+	" > /home/fabrice/.config/zathura/colors
+
+	cd /home/fabrice/.config/zathura/
+	bash generator.sh
+}

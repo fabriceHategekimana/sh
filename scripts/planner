@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://tasks.office.com/satom.ch/fr-CH/Home/Planner#/plantaskboard?groupId=e8b2f34a-eaeb-4145-be0f-dcc168cc9c0c&planId=gomI-KJxIEaSqtJ4XYlgWJcAB5wR&taskId=7AOrtcDas06Q5YMA0f6QNJcAMPyd &
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s audit -n notebook
+tmux send-keys -t audit 'vim /home/fabrice/sessions/projet/audit/note.md' Enter

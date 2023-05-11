@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/install/smartgit/bin/
+./smartgit.sh

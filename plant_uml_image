@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ "$1" == "open" ]]; then
+	image=${2:0:(-5)}.png
+	feh -R 1 $image &
+	#sleep 1
+	#feh_window=$(xdotool search --class feh)
+	#echo $image | entr xdotool key --window $feh_window r &
+elif [[ "$1" == "reload" ]]; then
+	feh_window=$(xdotool search --class feh)
+	xdotool key --window $feh_window r
+elif [[ "$1" == "close" ]]; then
+	pkill -x entr
+fi

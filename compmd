@@ -1,0 +1,56 @@
+#!/bin/bash
+nomUnique=$(python3 -c "print('$1'.split('.')[0])")
+if [ "$2" == "tex" ]; then
+	pandoc $1 -o $nomUnique.pdf --filter pandoc-plantuml
+elif [ "$2" == "texv" ]; then
+	pandoc $1 -o $nomUnique.pdf --filter pandoc-plantuml && zathura $nomUnique.pdf
+elif [ "$2" == "latex" ]; then
+	pandoc -s $1 -o $nomUnique.tex
+elif [ "$2" == "pdf" ];  then
+	pandoc -s $1 -c ~/note/gfm.css -o $nomUnique.html --filter pandoc-plantuml && wkhtmltopdf $nomUnique.html $nomUnique.pdf && rm $nomUnique.html
+elif [ "$2" == "pdfv" ];  then
+	pandoc -s $1 -c ~/note/gfm.css -o $nomUnique.html --filter pandoc-plantuml && wkhtmltopdf $nomUnique.html $nomUnique.pdf && zathura $nomUnique.pdf && rm $nomUnique.html $nomUnique.pdf
+elif [ "$2" == "cheat" ];  then
+	pandoc -s --mathml $1 -o $nomUnique.html && wkhtmltoimage $nomUnique.html $nomUnique.png
+elif [ "$2" == "cheat2" ];  then
+	pandoc -s $1 -o $nomUnique.html && wkhtmltoimage  $nomUnique.html $nomUnique.png
+elif [ "$2" == "html" ];  then
+	pandoc -s $1 -H ~/note/gfm.css -o $nomUnique.html && chromium $nomUnique.html & 
+elif [ "$2" == "pres" ];  then
+	pandoc -t beamer -V theme:Warsaw $1 -o $nomUnique.pdf --filter pandoc-plantuml
+elif [ "$2" == "prestex" ];  then
+	pandoc -t beamer -V theme:Warsaw $1 -o $nomUnique.tex --filter pandoc-plantuml
+elif [ "$2" == "presv" ];  then
+	pandoc -t beamer -V theme:Warsaw $1 -o $nomUnique.pdf --filter pandoc-plantuml && zathura $nomUnique.pdf && rm $nomUnique.pdf
+elif [ "$2" == "docx" ];  then
+	pandoc $1 -o $nomUnique.docx && libreoffice $nomUnique.docx &
+elif [ "$2" == "odt" ];  then
+	pandoc $1 -o $nomUnique.odt && libreoffice $nomUnique.odt &
+elif [ "$2" == "odp" ];  then
+	pandoc $1 -o $nomUnique.pptx && libreoffice --convert-to odp $nomUnique.pptx
+elif [ "$2" == "pptx" ];  then
+	pandoc $1 -o $nomUnique.pptx 
+elif [ "$2" == "pptxv" ];  then
+	pandoc $1 -o $nomUnique.pptx && libreoffice $nomUnique.pptx && rm $nomUnique.pptx
+elif [ "$2" == "reveal" ];  then
+	pandoc -t html5 --template=/home/fabrice/note/templates/revealjs.html --standalone --section-divs --variable theme="black" $1 -o $nomUnique.html
+elif [ "$2" == "image" ];  then
+	pandoc -t html5 --template=/home/fabrice/note/templates/reveal_single_slide.html --standalone --section-divs $1 -o $nomUnique.html
+	htmltopng $nomUnique.html $nomUnique.png
+elif [ "$2" == "jupyter" ];  then
+	jupyter-book myst init $1 --kernel python3
+elif [ "$1" == "-h" ];  then
+    	echo "
+CONVERT MARKDOWN FILE
+Usage:
+	compmd file.md [target]
+targets:
+tex	convert to pdf with latex engine
+pdf 	convert to pdf with GFM (actually not working)
+html	convert to html
+pres	convert to beamer pdf presentation
+docx	convert to a docx document
+odt 	convert to odt document
+-h	show this help menu
+	"
+fi

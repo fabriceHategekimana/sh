@@ -1,0 +1,12 @@
+#!/bin/bash
+
+projectName=$(tmux display -p '#{session_name}')
+
+if [[ "$1" == "add" ]]; then
+       shift
+	task project:$projectName add $@
+else
+	task project:$projectName
+fi
+
+

@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def	main [module_name] {
+	touch $"($module_name).rs"
+	mkdir $module_name
+}

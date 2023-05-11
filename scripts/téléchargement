@@ -1,0 +1,6 @@
+#!/bin/bash
+
+file=$(ls ~/Téléchargements | rofi -dmenu)
+
+~/sh/myopen $file
+

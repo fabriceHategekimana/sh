@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+	position=$(pwd)
+
+	cd /home/fabrice/tunnel
+
+	folder_name=${position##*/}
+
+	ln -s $position $folder_name 
+elif [[ "$1" == "-h" ]]; then
+       echo "[no param] create a link to your actual position to in the folder"
+fi

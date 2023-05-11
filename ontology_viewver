@@ -1,0 +1,3 @@
+#!/bin/bash
+
+firefox https://service.tib.eu/webvowl/#file=$(pwd)/$@

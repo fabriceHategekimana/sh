@@ -1,0 +1,12 @@
+#! /bin/bash
+name=${1%.csv}
+
+echo "
+.mode csv
+.import $1 $name
+.output $name.sql
+.dump" >> init.sql
+
+sqlite3 -bail -init init.sql
+
+rm init.sql

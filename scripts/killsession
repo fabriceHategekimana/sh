@@ -1,0 +1,10 @@
+#!/bin/bash
+sessionname=$(tmux display -p "#{session_name}")
+
+tmux kill-session -t $sessionname
+
+xdotool type "tmux a"
+
+sleep 0.3
+
+xdotool key Return 

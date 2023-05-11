@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ "$1" == "1" ]]; then
+	xmodmap -e "keycode 43 = Left"
+	xmodmap -e "keycode 44 = Down"
+	xmodmap -e "keycode 45 = Up"
+	xmodmap -e "keycode 46 = Right"
+elif [[ "$1" == "0" ]]; then
+	xmodmap -e "keycode 43 = h"
+	xmodmap -e "keycode 44 = j"
+	xmodmap -e "keycode 45 = k"
+	xmodmap -e "keycode 46 = l"
+else
+	firefox -new-tab https://www.snokido.fr/jeu/friday-night-funkin &
+fi

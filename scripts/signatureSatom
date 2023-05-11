@@ -1,0 +1,2 @@
+#!/bin/bash
+xclip -sel clip /home/fabrice/sessions/projet/satom/mail.md

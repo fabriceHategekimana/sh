@@ -1,0 +1,13 @@
+#!/bin/bash
+#exécution du timer avec le temps donnée
+
+temps=$(( $1 * 60 ))
+
+while [ $temps -gt 0 ]; 
+do
+	temps=$(( $temps - 1 ))
+	sleep 1
+	clear
+	toilet --termwidth -f future $( date -d@$temps -u +%H:%M:%S )
+done
+notify-send "Fin du minuteur!"

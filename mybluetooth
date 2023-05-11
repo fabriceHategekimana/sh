@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+if [ "$1" == "pairing"  ]; then
+	shift
+	SELECTEDDEVICE=$(bluetoothctl devices | sed -e "s/Device \w\w:\w\w:\w\w:\w\w:\w\w:\w\w \(.*\)$/\1/" | rofi -dmenu | sed -e "s/\([^\s]\)\s$/\1/")
+
+	selectedPortNumber=$(bluetoothctl paired-devices | grep "$SELECTEDDEVICE" | sed -e "s/Device \(\w\w:\w\w:\w\w:\w\w:\w\w:\w\w\) .*$/\1/")
+
+
+	if [ "$1" == "remove" ]; then
+		bluetoothctl pair $selectedPortNumber
+	else
+		bluetoothctl remove $selectedPortNumber
+	fi
+
+else
+	shift
+	SELECTEDDEVICE=$(bluetoothctl paired-devices | sed -e "s/Device \w\w:\w\w:\w\w:\w\w:\w\w:\w\w \(.*\)$/\1/" | rofi -dmenu | sed -e "s/\([^\s]\)\s$/\1/")
+
+	selectedPortNumber=$(bluetoothctl paired-devices | grep "$SELECTEDDEVICE" | sed -e "s/Device \(\w\w:\w\w:\w\w:\w\w:\w\w:\w\w\) .*$/\1/")
+
+
+	if [ "$1" == "disconnect" ]; then
+		bluetoothctl disconnect $selectedPortNumber
+	else
+		bluetoothctl connect $selectedPortNumber
+	fi
+fi

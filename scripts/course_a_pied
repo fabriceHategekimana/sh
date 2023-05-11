@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://www.unige.ch/dife/sports/activites-az/course-pied/ &
+

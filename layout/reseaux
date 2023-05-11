@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s reseaux -n notebook
+tmux send-keys -t reseaux 'vim /home/fabrice/sessions/projet/reseaux/note.md' Enter

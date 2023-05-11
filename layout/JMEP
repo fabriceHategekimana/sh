@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s JMEP -n notebook
+tmux send-keys -t JMEP 'vim /home/fabrice/sessions/projet/JMEP/note.md' Enter

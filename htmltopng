@@ -1,0 +1,2 @@
+#!/bin/bash
+cutycapt --url=file://$(pwd)/$1 --out=$2

@@ -1,0 +1,6 @@
+#!/bin/bash
+cd /home/fabrice/.config/kitty/
+
+bash generator.sh
+
+cd -

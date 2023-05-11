@@ -1,0 +1,9 @@
+#!/bin/bash
+xdotool key ctrl+l
+xdotool key Tab Tab
+sleep 0.2
+xdotool key Return
+sleep 0.2
+xdotool key Down Down
+xdotool key Return
+xdotool key Tab Tab

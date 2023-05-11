@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source ~/sh/core
+source ~/sh/myopen_module/extention_software_table
+
+extension=$(get_extension $1)
+
+software=$(get_software $extension)
+
+if [[ "$software" == "None" ]]; then
+	notify-send "There is no software for the '$extension' extesion" 
+	notify-send "Please define a commande with 'addopener [extension] [software]'"
+else
+	$software ~/Téléchargements/$1
+fi

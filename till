@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo $(task calc $1 - today)

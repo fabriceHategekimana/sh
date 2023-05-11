@@ -1,0 +1,34 @@
+#!/bin/bash
+
+template_path=~/note/templates
+
+function get_template {
+	cp -ru $template_path/$1 .
+}
+
+function new_window {
+	name=$1
+	shift
+	tmux new-window -n "$1" $@
+}
+
+function numerote {
+	file=$1
+	destination_folder=$2
+	number=$(ls $destination_folder | wc -l)
+	formated_number=$(printf "%03d\n" $number)
+	name=${file%.*}
+	extension=${file##*.} 
+	mv $1 $destination_folder/${name}_${formated_number}.$extension
+}
+
+function backup {
+	# $1 filename 
+	# $2 backup (and destination) directory
+	filename=$1
+	destination=$2
+
+	numerote $filename $destination
+
+	get_template $filename
+}

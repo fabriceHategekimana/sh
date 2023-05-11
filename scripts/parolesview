@@ -1,0 +1,10 @@
+#!/bin/bash
+
+parolespath=/home/fabrice/sessions/projet/programme/paroles
+
+cd $parolespath
+paroles=$(ls $parolespath | rofi -multi-select -dmenu)
+for parole in $paroles;
+do
+	/home/fabrice/sh/compmd $parolespath/$parole pptxv
+done

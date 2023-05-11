@@ -1,0 +1,41 @@
+#!/bin/bash
+if [ "$1" == "prompt" ]; then
+	text=$(python3 ~/python/dialog.py)
+	task add $text
+elif [ "$1" == "task" ]; then
+	pkill -x teams
+	task
+	echo "task/>"
+	while read task
+	do
+		clear
+		task $task
+		echo "task/>"
+	done 
+elif [ "$1" == "calendar" ]; then
+	task calendar
+	while read task
+	do
+		task $task
+	done 
+elif [ "$1" == "evenement" ]; then
+	date=$(python3 ~/python/calendar.py)
+	text=$(python3 ~/python/dialog.py)
+	task add $text due:$date
+	echo "$(date --date="$date" +%m/%d/%Y) [1] $text" >> ~/.calcurse/apts
+elif [ "$1" == "-h" ]; then
+	echo "
+promt		display a dialog to add a task
+task		display an interactive prompt
+calendar	display the calendar
+evenement	add an event
+[blank]
+	"
+else
+	path=$(pwd)
+	project="project:$(python3 -c "print('$path'.split('/')[4])")"
+	while read task
+	do
+		task add $1 $task $project
+	done 
+fi

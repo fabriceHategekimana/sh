@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [] {
+	let plugin = (^ls /home/fabrice/vim_plugins | rofi -dmenu)
+	tmux new-window -n $"($plugin)" vim $"/home/fabrice/vim_plugins/($plugin)/plugin/($plugin).vim"
+}

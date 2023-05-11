@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s question -n notebook
+tmux send-keys -t question 'vim /home/fabrice/sessions/projet/question/note.md' Enter

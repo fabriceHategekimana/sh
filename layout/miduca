@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s miduca -n notebook
+tmux send-keys -t miduca 'vim /home/fabrice/sessions/projet/miduca/note.md' Enter

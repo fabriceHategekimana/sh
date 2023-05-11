@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set_feh_theme(){
+	echo "
+	#!/bin/bash
+
+	feh -R 1 --image-bg \"$(get_color 'background')\" \$@
+	" > /home/fabrice/sh/myfeh
+}

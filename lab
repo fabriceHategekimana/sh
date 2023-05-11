@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function create_if_not_exist {
+	if [[ ! -d "$1" ]]; then
+	       mkdir $1
+	fi
+}
+
+create_if_not_exist labs
+create_if_not_exist labs/logs
+
+cd labs
+
+selected_lab=$(ls -d * | rofi -dmenu)
+labfullpath=$(pwd)/$selected_lab
+
+create_if_not_exist $labfullpath
+
+tmux new-window -n $selected_lab -c $labfullpath

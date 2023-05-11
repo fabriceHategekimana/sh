@@ -1,0 +1,10 @@
+#!/bin/bash
+config=$(cat /home/fabrice/sh/variables/configs | rofi -dmenu)
+
+configPath=$(echo $config | sed "s/\w\+\ \(.*\)/\1/")
+
+if [[ -z "$configPath" ]]; then
+	echo "no config path selected"      
+else
+	kitty vim $configPath
+fi

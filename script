@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# prendre les executables
+desktop=$(ls /usr/share/applications/ | sed "s/\.desktop//g")
+# prendre les scripts
+scripts=$(ls /home/fabrice/sh/scripts/)
+
+# combiner les deux
+combined=$(echo $desktop $scripts)
+
+# on y enlève tout les éléments de la blacklist
+blacklist=$(cat /home/fabrice/sh/variables/application_blacklist)
+for element in $blacklist;
+do
+	combined=$(echo $combined | sed "s/$element//")
+done
+
+# l'utilisateur sélectionne l'un d'entre eux
+result=$(echo "$combined" | rofi -dmenu -sep " ")
+
+/home/fabrice/sh/scripts/$result || $result || (cd /usr/share/applications/ && gtk-launch $result.desktop)

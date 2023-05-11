@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source=$(ls /home/fabrice/Vidéos/wedata/add_group/ | rofi -dmenu)
+
+cp /home/fabrice/Vidéos/wedata/add_group/$source /home/fabrice/Vidéos/obs/

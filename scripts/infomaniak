@@ -1,0 +1,2 @@
+#!/bin/bash
+firefox -new-tab https://manager.infomaniak.com/v3/134420/ng/home &

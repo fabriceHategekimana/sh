@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s siloé -n notebook
+tmux send-keys -t siloé 'vim /home/fabrice/sessions/projet/siloé/note.md' Enter

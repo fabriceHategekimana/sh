@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def	main [] {
+	let mydate = (^date)
+	echo $"## ($mydate)"
+} 

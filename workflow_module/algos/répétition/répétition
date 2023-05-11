@@ -1,0 +1,24 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+repetitions=labs/répétitions
+programmes=labs/programmes
+
+# get the presence template
+get_template présence.md
+mv présence.md $repetitions
+cd $repetitions
+numerote présence.md
+renamed_repetition=$(ls -t | head -n 1)
+cd ../..
+
+# get the programme template
+get_template programme.md
+mv programme.md $programmes
+cd $programmes
+numerote programme.md
+renamed_programme=$(ls -t | head -n 1)
+cd ../..
+
+
+new_window répétitions vim -p $repetitions/$renamed_repetition $programmes/$renamed_programme

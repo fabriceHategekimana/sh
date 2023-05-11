@@ -1,0 +1,5 @@
+#!/bin/bash
+source ~/sh/core
+source ~/sh/workflow_module/algos/algo_module
+
+get_template data.db

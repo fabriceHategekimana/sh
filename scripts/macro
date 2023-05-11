@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [[ -e ~/temp/map.sh ]]; then
+	rm ~/temp/map.sh
+fi 
+if [[ -e ~/temp/capture ]]; then
+	rm ~/temp/capture
+fi 
+if [[ -e ~/temp/removed ]]; then
+	rm ~/temp/removed
+fi 
+if [[ -e ~/temp/parenthese ]]; then
+	rm ~/temp/parenthese
+fi 
+if [[ -e ~/temp/filtered ]]; then
+	rm ~/temp/filtered
+fi 
+if [[ -e ~/temp/transformed ]]; then
+	rm ~/temp/transformed
+fi 
+
+touch ~/temp/map.sh && chmod +x ~/temp/map.sh
+
+winid=$(xwininfo | grep "xwininfo: Window id:" | sed "s/xwininfo: Window id: \([0-9]x[0-9a-f]\+\) .*$/\1/")
+
+capture=$(xev -id $winid -event keyboard | tr "\n" " ")
+
+echo $capture >> ~/temp/capture
+
+## parenthese interesting suff
+parenthese=$(echo $capture | sed "s/KeyRelease event, serial 21, synthetic NO, window 0x[[:xdigit:]]\+, root 0x[[:xdigit:]]\+, subw 0x0, time [[:digit:]]\+, (\([[:digit:]]\+\),\([[:digit:]]\+\)/Fabrice (\1;\2)/g")
+
+echo $parenthese >> ~/temp/parenthese
+
+filtered=$(echo $parenthese | sed "s/[^(]*\(([^)]\+)\)[^(]*/\1/g" | sed "s/(4294967211)(4294967211)/(4294967211)/g")
+
+echo $filtered >> ~/temp/filtered
+
+# remove uninteresting parenthese
+removed=$(echo $filtered | sed "s/([[:digit:]]\+,[[:digit:]]\+)//g" | sed "s/([[:digit:]]\+)//g" | sed "s/(keysym[^)]\+)//g")
+
+echo $removed >> ~/temp/removed
+
+## transform
+transformed=$(echo $removed | sed "s/(\([[:digit:]]\+\);\([[:digit:]]\+\))/xdotool mousemove \$((\1+30)) \$((\2+60)) sleep 1 xdotool click 1 /g")
+
+echo $transformed >> ~/temp/transformed
+
+# remove rest parenthese
+echo $transformed | sed "s/([[:digit:]]\+,[[:digit:]]\+)//g" | sed "s/sleep/\nsleep/g" | sed "s/xdotool/\nxdotool/g" >> ~/temp/map.sh
+
+
+##brute
+##capture
+##parenthese
+##filtered
+##removed
+##transformed

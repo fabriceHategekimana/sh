@@ -1,0 +1,7 @@
+#!/bin/bash
+
+val=$(bash -c "$1" | fzf)
+
+format="${2//_fzf_/$val}"
+
+echo $format | xclip -selection clipboard

@@ -1,0 +1,1 @@
+xdotool key ctrl+c && xclip -o | espeak -v fr

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# move all the fonts to the fonts folder
+mv *.ttf ~/.local/share/fonts
+
+# make the font accessible by the system
+sudo fc-cache -vf ~/.local/share/fonts

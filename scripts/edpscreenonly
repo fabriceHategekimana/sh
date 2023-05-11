@@ -1,0 +1,2 @@
+#!/bin/bash
+xrandr --output eDP --mode 1920x1080 

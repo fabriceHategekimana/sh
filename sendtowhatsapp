@@ -1,0 +1,40 @@
+#!/bin/bash
+#$1 = name of the contact
+#$2 = message
+
+initialisation(){ 
+# open whatsapp in firefox
+firefox -new-window https://web.whatsapp.com/
+
+# trouver le contact d'envoie
+sleep 1
+# full screen
+xdotool key F11
+sleep 7
+xdotool mousemove 350 102 
+xdotool click 1
+# element de recherche
+xdotool type "$1"
+xdotool key Return
+
+#click to the text area and send the message
+xdotool mousemove 849 1016
+xdotool click 1
+}
+
+if [ "$1" == "-f"  ]; then
+	shift
+	initialisation $1
+	~/sh/sendlinebyline $2
+else
+	initialisation $1
+	notify-send "fin de l'initialisation"
+	sleep 1
+	xdotool type "$2"
+	notify-send "fin de l'écriture du message"
+fi
+
+# send and close
+xdotool key Return 
+xdotool key alt+shift+q
+xdotool key alt+shift+q

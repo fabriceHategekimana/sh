@@ -1,0 +1,8 @@
+#!/bin/bash
+
+file_name=$1
+cgp=/home/fabrice/sh/chatgpar
+
+while read line; do
+	$cgp "$line" &
+done < $file_name

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#création du fichier
+
+for vid in $(ls -tr *.mkv);
+do
+	echo "file '$vid'" >> concat_list.txt
+done
+
+ffmpeg -f concat -safe 0 -i concat_list.txt -c copy output.mkv
+
+rm concat_list.txt

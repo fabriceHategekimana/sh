@@ -1,0 +1,14 @@
+#!/home/fabrice/.cargo/bin/nu
+
+#```{code-cell} ipython3
+#
+#```
+
+def	main [] {
+	let cell_id = (/home/fabrice/sh/cell_id_nb)
+
+	echo $"```{code_cell} ipython3
+($cell_id)
+		
+```"
+} 

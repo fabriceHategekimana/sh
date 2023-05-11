@@ -1,0 +1,11 @@
+#!/bin/bash
+#$1= the name of the class window
+#$2= the name of the key to dend (symkey (not in hexa))
+
+#On sélection la fenêtre $1 visible
+mytarget=$(xdotool search --onlyvisible $1 | head -1)
+
+#on rend la fenêtre visible active
+xdotool windowactivate --sync $mytarget
+
+xdotool key --window $mytarget --clearmodifiers $2

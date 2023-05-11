@@ -1,0 +1,7 @@
+#!/bin/bash
+source ~/sh/core
+source ~/sh/workflow_module/algos/algo_module
+
+#get_template [empty]
+
+new_window message vim ~/sh/workflow_module/algos/message/src/note.md

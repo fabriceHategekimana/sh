@@ -1,0 +1,8 @@
+#!/bin/bash
+
+vid=~/Vidéos/obs
+
+newer_file=$(ls -t ~/Vidéos/obs | head -n 1)
+
+rm $vid/$newer_file
+

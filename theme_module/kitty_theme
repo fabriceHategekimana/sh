@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set_kitty_theme(){
+	echo "
+	Color scheme {{{
+		foreground $(get_color "foreground")
+		background $(get_color "background")
+
+	#: The foreground and background colors
+		background_opacity $opacity
+		selection_foreground #000000
+
+		color0 $(get_color "foreground")
+		color8 #AAAAAA
+
+		color1 $(get_color "commentcolor")
+		color9 $(get_color "commentcolor")
+
+		color2 $(get_color "leadcolor")
+		color10 $(get_color "leadcolor")
+
+		color3 $(get_color "colorspec")
+		color11 $(get_color "leadcolor")
+
+		color4 $(get_color "discretcolor")
+		color12 $(get_color "commentcolor")
+
+		color5 $(get_color "leadcolor")
+		color13 $(get_color "colorspec")
+
+		color6 $(get_color "commentcolor")
+		color14 $(get_color "discretcolor")
+
+		color7 $(get_color "secondarycolor")
+		color15 $(get_color "leadcolor")
+	}}}
+	" > /home/fabrice/.config/kitty/colors
+
+	cd /home/fabrice/.config/kitty/
+	bash generator.sh
+	#cd $(get_color "startdirectory")
+}

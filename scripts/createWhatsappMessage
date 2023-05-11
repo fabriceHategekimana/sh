@@ -1,0 +1,2 @@
+#!/bin/bash
+kitty --class="floating" vim /home/fabrice/sh/messages_whatsapp/$1

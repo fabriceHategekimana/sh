@@ -1,0 +1,45 @@
+#! /bin/python3
+import subprocess
+import time
+from cmd import Cmd
+from cli_color import mark_words, color_word_with
+
+
+
+def ask_coq(p, commande):
+    res = p.communicate(bytes(commande+"\n", encoding='utf-8'))[0].decode()
+    p.stdin.close()
+    return res
+
+
+class MyPrompt(Cmd):
+    # defining variables for i in  the display
+    logo = ""+"|"
+    prompt = logo+color_word_with("Coq", "light2")+"> "
+    intro = "Coq Wrapper!"
+    use_raw_input = False
+    mode = "normal"
+    COMPLETIONLIST = []
+
+    def __init__(self):
+        super(MyPrompt, self).__init__()
+        self.p = subprocess.Popen(['coqtop', '-q'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    def default(self, inp):
+        result = ask_coq(self.p, inp)
+        self.formated_print(result)
+        if inp == "Quit.":
+            self.p.terminate()
+            exit()
+
+    def do_exit(self, inp):
+        return True
+
+    def formated_print(self, result):
+        result = mark_words(result, ["=", ":", "<", ">", "-", "|"], "second")
+        result = mark_words(result, ["Prop", "nat", "Type", "bool"], "light2")
+        result = mark_words(result, ["Coq"], "light")
+        result = mark_words(result, ["Error"], "highlight")
+        print(result)
+
+MyPrompt().cmdloop()

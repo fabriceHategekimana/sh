@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -z "$@" ]]; then
+	kitty --class "floating" vim /home/fabrice/sh/variables/questions
+else
+	echo "$@" >> /home/fabrice/sh/variables/questions
+fi
+
+

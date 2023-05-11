@@ -1,0 +1,18 @@
+#!/bin/bash
+layoutpath=/home/fabrice/sh/layout
+
+layouts=$(ls $layoutpath | rofi -multi-select -i -dmenu)
+
+for layout in $layouts
+do
+	$layoutpath/$layout
+	# tmux command
+	xdotool getactivewindow key ctrl+a
+	xdotool getactivewindow type ":"
+	#get the name of the layout (with the attach-session -t)
+	echo "attach-session -t $layout" | xclip -sel clip
+	# paste
+	xdotool getactivewindow key ctrl+shift+v
+	sleep 0.4
+	xdotool getactivewindow key --delay 400 Return Return
+done

@@ -1,0 +1,25 @@
+#!/bin/bash
+if [ "$1" == "plus" ]; then
+	infos=$(pacmd list-sinks | grep "volume: front-left")
+	res=$(python3 -c "print(int('$infos'.split('/')[0].split(':')[2])+5000)")
+	echo $res
+	pacmd set-sink-volume 0 $res
+	pacmd set-sink-volume 1 $res
+elif [ "$1" == "moins" ]; then
+	infos=$(pacmd list-sinks | grep "volume: front-left")
+	res=$(python3 -c "print(int('$infos'.split('/')[0].split(':')[2])-5000)")
+	echo $res
+	pacmd set-sink-volume 0 $res
+	pacmd set-sink-volume 1 $res
+else
+	state=$(pacmd list-sinks | grep -c "muted: no")
+	echo  $state
+	if [ "$state" == "1" ]; then
+		pacmd set-sink-mute 0 true	
+		pacmd set-sink-mute 1 true	
+	else
+		pacmd set-sink-mute 0 false
+		pacmd set-sink-mute 1 false
+	fi
+fi
+

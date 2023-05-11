@@ -1,0 +1,2 @@
+#!/bin/bash
+cp -r /home/fabrice/install/reveal/ .

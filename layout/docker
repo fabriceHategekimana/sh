@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s docker -n notebook
+tmux send-keys -t docker 'vim /home/fabrice/sessions/projet/docker/note.md' Enter

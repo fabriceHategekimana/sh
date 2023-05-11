@@ -1,0 +1,20 @@
+#!/bin/bash
+
+input=$1
+name=$(echo "$1" | sed -e "s/ /_/g" -e "s/'/_/g" -e "s/\./_/g" -e "s/!//g" -e "s/ ?//g" -e "s/?//g" -e "s/-/_/g" -e "s/,//g" | cut -c 1-20)
+
+res=$(/home/fabrice/sh/chatg $input)
+
+if [[ ! -d src ]]; then
+       mkdir src
+fi
+
+cd src
+touch $name.md
+echo "# $input">> $name.md
+echo " " >> $name.md
+echo $res >> $name.md
+echo " " >> $name.md
+echo "----" >> $name.md
+echo " " >> $name.md
+

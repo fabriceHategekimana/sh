@@ -1,0 +1,2 @@
+#!/bin/bash
+firefox -new-tab https://www.pinterest.ch/search/pins/?q=$1&rs=typed&term_meta[]=$1%7Ctyped &

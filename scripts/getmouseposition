@@ -1,0 +1,6 @@
+#!/bin/bash
+
+coords=$(xdotool getmouselocation | sed "s/x:\([0-9]\+\) y:\([0-9]\+\) .*/(\1,\2)/")
+
+notify-send "$coords"
+

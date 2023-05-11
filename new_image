@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Reçoit le nom de l'image en paramètre (le demander si ce n'est pas le cas)
+
+if [[ "$#" == "0" ]]; then
+	name=$(rofi -dmenu 2> /tmp/err)
+else
+	name=$1
+fi
+
+# Choisi le type d'image
+type=$(echo "plantuml,gimp,python,libreoffice" | rofi -dmenu -sep "," 2> /tmp/err)
+
+if [[ ! -e "/images" ]]; then
+       mkdir images 2> /tmp/err
+fi
+
+if [[ "$type" == "plantuml" ]]; then
+	if [[ ! -e "/images/diagrams" ]]; then
+	       mkdir images/diagrams 2> /tmp/err
+	fi
+	touch images/diagrams/$name.puml
+	tmux new-window -n "$name" vim images/diagrams/$name.puml
+	echo "![](images/diagrams/$name.png)"
+elif [[ "$type" == "gimp" ]]; then
+	cp ~/note/templates/1px_image.png images/$name.png
+	gimp images/$name.png
+	echo "![](images/$name.png)"
+elif [[ "$type" == "python" ]]; then
+	if [[ ! -e "/images/python" ]]; then
+	       mkdir images/python 2> /tmp/err
+	fi
+	cp ~/note/templates/python_graph.py images/python/$name.py
+	sed -i "s/NAME/$name.png/" images/python/$name.py
+	tmux new-window -n "$name" vim images/python/$name.py
+	echo "![](images/python/$name.png)"
+elif [[ "$type" == "libreoffice" ]]; then
+	if [[ ! -e "/images/libreoffice" ]]; then
+	       mkdir images/libreoffice 2> /tmp/err
+	fi
+	cp ~/note/templates/libreoffice_logo.odg images/libreoffice/$name.odg 
+	tmux new-window -n "$name" libreoffice images/libreoffice/$name.odg
+	echo "![](images/libreoffice/$name.png)"
+else
+	echo "![]()"
+fi

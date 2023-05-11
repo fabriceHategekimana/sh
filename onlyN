@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#On sélection la fenêtre $1 visible
+#mytarget=$(xdotool search --onlyvisible "Gimp-2.10" | head -1)
+
+#on rend la fenêtre visible active
+#xdotool windowactivate --sync $mytarget
+xdotool search --class "Gimp-2.10" windowactivate --sync %2
+
+#xdotool key --clearmodifiers n
+xdotool getactivewindow key --clearmodifiers n
+
+

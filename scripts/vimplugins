@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmux new-window /home/fabrice/sh/lf /home/fabrice/vim_plugins/

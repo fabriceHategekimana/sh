@@ -1,0 +1,6 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+get_template programme.md
+
+new_window programme vim programme.md

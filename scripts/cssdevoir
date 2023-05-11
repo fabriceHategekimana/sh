@@ -1,0 +1,8 @@
+#!/bin/bash
+xdotool mousemove $((18+30)) $((79+60)) && sleep 0.2 && xdotool click 1
+xdotool mousemove $((151+30)) $((69+60)) && sleep 0.5 && xdotool click 1
+xdotool mousemove $((656+30)) $((207+60)) && sleep 0.5 && xdotool click 1
+xdotool mousemove $((112+30)) $((251+60)) && sleep 1.5 && xdotool click 1
+xdotool mousemove $((475+30)) $((967+60)) && sleep 1.1 && xdotool click 1
+xdotool mousemove $((501+30)) $((867+60)) && sleep 1 && xdotool click 1
+xdotool mousemove $((587+30)) $((188+60)) && sleep 1 && xdotool click 1

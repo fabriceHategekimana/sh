@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd ~/Vidéos/obs/
+
+last=$(ls -t *.mkv | head -n 1)
+
+if [[ -z "$1" ]]; then
+       mv $last saved
+   else
+	   mv $last saved/$1.mkv
+fi

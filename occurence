@@ -1,0 +1,3 @@
+#!/bin/bash
+# count the number of occurence
+python3 ~/script/occurence.py $@ | sort -nr

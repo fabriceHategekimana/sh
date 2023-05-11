@@ -1,0 +1,15 @@
+#!/bin/bash
+:'
+OPEN
+open(string) -> void
+
+Ouvre une application dépendament de la chaîne entrée
+'
+
+# Si la chaîne ne contient pas d'espace
+# Si la chaîne est un chemin (regexp)
+# Si la chaine est une image markdown
+# Si la chaîne est un lien markdown
+# sinon erreur "can't open the file"
+
+

@@ -1,0 +1,2 @@
+#!/bin/bash
+kitty --class floating vim ~/temp/$1.md

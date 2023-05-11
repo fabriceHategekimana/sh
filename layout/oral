@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s oral -n notebook
+tmux send-keys -t oral 'vim /home/fabrice/sessions/projet/oral/note.md' Enter

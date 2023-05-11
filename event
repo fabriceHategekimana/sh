@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while [ true ]
+do
+	sleep 1
+	if [ "$(date +%H:%M)" == "22:00" ]; then
+		sendKey obs Home
+		break
+	fi
+done
+

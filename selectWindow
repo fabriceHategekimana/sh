@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+pane=$(tmux list-windows -F "#{session_name}:#{window_name}.#{pane_index}" | rofi -dmenu)
+
+tmux select-window -t $pane

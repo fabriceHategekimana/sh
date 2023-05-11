@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s hacking -n notebook
+tmux send-keys -t hacking 'vim /home/fabrice/sessions/projet/hacking/note.md' Enter

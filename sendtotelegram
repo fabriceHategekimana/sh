@@ -1,0 +1,29 @@
+#!/bin/bash
+
+initialisation(){ 
+	#open telegram
+	telegram &
+	sleep 1
+
+	# look for the contact
+	xdotool type $1
+	xdotool key Return
+}
+
+if [ "$1" == "-f"  ]; then
+    shift
+	initialisation $1
+	# write the message
+	~/sh/sendlinebyline $2
+elif [ "$1" == "-h"  ]; then
+	"echo 
+sendtotelegram [contact] [message]"
+else
+	initialisation $1
+	# write the message
+	xdotool type "$2"
+fi
+
+# send and quit
+xdotool key Return
+xdotool key alt+shift+q

@@ -1,0 +1,2 @@
+#!/bin/bash
+bt-obex --server --auto-accept

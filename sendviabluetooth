@@ -1,0 +1,2 @@
+#!/bin/bash
+bt-obex -p E8:78:29:C0:4B:61 $1

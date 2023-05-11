@@ -1,0 +1,11 @@
+#!/bin/bash
+
+xdotool mousemove 20 40
+xdotool click 1
+
+xdotool mousemove 99 349
+xdotool click 1
+
+xdotool key Delete
+xdotool type "$1"
+xdotool key Return

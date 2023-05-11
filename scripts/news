@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#firefox -new-tab https://fr.euronews.com/bulletin &
+#firefox -new-tab https://www.rts.ch/info/ &
+#firefox -new-tab https://www.ictjournal.ch/ &
+#firefox -new-tab https://www.infochretienne.com/ &
+#firefox -new-tab https://about.fb.com/news/category/technologies/meta/ &
+#firefox -new-tab https://news.google.com/u/1/topstories?hl=fr&gl=CH&ceid=CH%3Afr &
+#firefox -new-tab https://www.influenth.com/ &
+#firefox -new-tab https://www.persecution.org/category/news/ &
+
+firefox https://journal.r-project.org/news.html &
+firefox https://www.python.org/blogs/ &
+firefox https://blog.rust-lang.org/ &

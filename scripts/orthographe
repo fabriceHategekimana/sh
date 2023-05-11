@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://docs.google.com/document/d/1VVeJRZ9cLpj8qX5ZJUao1dUlRldseBthQ2QwjivyVps/edit &
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -rf /home/fabrice/sessions/projet/$1
+rm /home/fabrice/sh/layout/$1

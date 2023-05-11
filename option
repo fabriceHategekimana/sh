@@ -1,0 +1,6 @@
+#!/bin/bash
+optionpath=/home/fabrice/sh/options
+
+selectedoption=$(ls $optionpath | rofi -dmenu)
+
+$optionpath/$selectedoption $1

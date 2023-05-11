@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gimp ~/Images/memes_WeData/whos_that_language.png
+

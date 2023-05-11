@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set_neofetch_theme(){
+	echo "
+	#!/bin/bash
+	neofetch --kitty $backgroundimage
+	" > /home/fabrice/sh/myneofetch
+}

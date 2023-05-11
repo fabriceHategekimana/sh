@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# récupérer le lien (depuis le clipboard)
+xdotool key ctrl+c
+link=$(xclip -o)
+
+# écrire le contenu
+echo "#!/bin/bash
+firefox -new-tab $link &
+" >> /home/fabrice/sh/scripts/$1
+
+# chmod le fichier
+chmod +x /home/fabrice/sh/scripts/$1

@@ -1,0 +1,2 @@
+#!/bin/bash
+feh --fullscreen --auto-zoom /home/fabrice/Images/background/$(ls /home/fabrice/Images/background/ | rofi -dmenu)

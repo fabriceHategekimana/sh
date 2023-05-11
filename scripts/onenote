@@ -1,0 +1,2 @@
+#!/bin/bash
+firefox -new-tab https://satomitlearning-my.sharepoint.com/personal/fabrice_hategekimana_satom_ch/_layouts/15/Doc.aspx?sourcedoc={4610e4a9-af53-446b-8930-0add3e4cbb69}&action=edit&wd=target%28Mapping.one%7Ce3da75ec-40e1-4e36-8f3e-039c3c603454%2FComplete%20List%20CSS%7Cd24f8239-e82b-4aea-8baa-5f4c6210071e%2F%29} &

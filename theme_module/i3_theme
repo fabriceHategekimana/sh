@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set_i3_theme(){
+	echo "
+	set \$background $(get_color "background")
+	set \$foreground $(get_color "foreground")
+	set \$leadcolor $(get_color "leadcolor")
+	set \$commentcolor $(get_color "commentcolor")
+	set \$secondarycolor $(get_color "secondarycolor")
+	set \$colorspec $(get_color "colorspec")
+	set \$discretcolor $(get_color "discretcolor")
+
+	exec feh --bg-fill $backgroundimage
+	" > /home/fabrice/.config/i3/colors
+
+	cd /home/fabrice/.config/i3/
+	bash generator.sh
+	feh --bg-fill $backgroundimage
+}
+

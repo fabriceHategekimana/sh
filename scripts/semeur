@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# on format l'entrée
+without_double_point=${@//:/-}
+without_space=${without_double_point// /-}
+with_all_lower_case=${without_space,,}
+
+firefox -new-tab https://emcitv.com/bible/$with_all_lower_case-semeur.html &

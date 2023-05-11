@@ -1,0 +1,5 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+get_template délégation.md
+new_window délégation vim délégation.md

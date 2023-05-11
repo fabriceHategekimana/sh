@@ -1,0 +1,10 @@
+#!/bin/bash
+formatedName=$(echo "$@" | sed "s/ /_/g" | sed "s/'/_/g" | sed "s/-/_/g")
+echo $formatedName | xclip -sel clip
+
+lmms /home/fabrice/lmms/piano.mmpz
+python3 /home/fabrice/script/partition.py /home/fabrice/lmms/$formatedName.mid $formatedName $@
+compmd $formatedName.md pdf
+evince $formatedName.pdf
+
+rm /home/fabrice//lmms/$formatedName.mid

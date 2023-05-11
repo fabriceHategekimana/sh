@@ -1,0 +1,1 @@
+swift test | grep failed | sed 's/home\/fabrice\/projet\/travail\/uni\/master\/modelisation-verification\/modelisation-verification\/Homework\/hw4_strategies\/Tests\/HomeworkTests//g' | sed 's/XCTAssertEqual failed: //g'

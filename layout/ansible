@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s ansible -n notebook
+tmux send-keys -t ansible 'vim /home/fabrice/sessions/projet/ansible/note.md' Enter

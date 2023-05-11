@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	language=$(cat /home/fabrice/sh/variables/speak | tr '\n' ' ' | sed "s/ //")
+	if [ "$language" == "fr" ]; then
+		   /home/fabrice/sh/speakfr
+	elif [ "$language" == "en" ]; then
+		   /home/fabrice/sh/speaken
+	fi
+else
+	echo $1 > /home/fabrice/sh/variables/speak
+fi

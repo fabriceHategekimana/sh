@@ -1,0 +1,2 @@
+#!/bin/bash
+xrandr --output eDP --output HDMI-A-0 --right-of eDP

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+firefox https://translate.google.com/?hl=fr &

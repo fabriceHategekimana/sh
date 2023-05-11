@@ -1,0 +1,1 @@
+xclip -o | espeak -v en -s 150 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# get file number and the extension
+file_number=$(ls | wc -l)
+extension=$(echo ${1##*.})
+
+# rename the actual file name
+mv $1 $file_number.$extension

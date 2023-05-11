@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# firefox -new-tab https://mail.google.com/mail/u/0/?hl=fr#inbox
+
+firefox -new-tab https://mail.google.com/mail/u/1/#inbox &

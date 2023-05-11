@@ -1,0 +1,6 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+backup quotidien.md quotidiens
+
+new_window quotidien vim quotidien.md

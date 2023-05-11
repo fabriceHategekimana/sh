@@ -1,0 +1,11 @@
+#!/bin/bash
+
+new_name=$(rofi -dmenu)
+
+cd ~/Vidéos/obs/
+bash ~/sh/concat
+
+mv output.mkv $new_name.mkv
+
+nautilus ~/Vidéos/obs/ &
+

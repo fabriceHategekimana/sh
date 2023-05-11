@@ -1,0 +1,4 @@
+#!/bin/bash
+binary=/home/fabrice/sessions/projet/predicat/predicat/target/debug/predicat
+
+cp -f $binary ~/sh/

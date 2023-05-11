@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 ~/sh/myopen_module/extension_software_manager.py add $1 $2

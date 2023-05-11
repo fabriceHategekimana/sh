@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "
+éta -> toggle activitybar
+étb -> toglle sidebar
+étt -> open terminal
+ctrl+maj+^ -> toggle terminal
+ctrl+, -> open settings
+"

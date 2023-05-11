@@ -1,0 +1,48 @@
+#!/bin/bash
+
+parolespath=/home/fabrice/sessions/projet/programme/paroles
+
+if [ "$1" == "exist" ]; then
+	cd $parolespath
+	fzf
+	cd -
+elif  [ "$1" == "get" ]; then
+	cd $parolespath
+	paroles=$(ls $parolespath | rofi -multi-select -dmenu)
+	for parole in $paroles;
+	do
+		cp $parolespath/$parole /home/fabrice/rendu
+		compmd /home/fabrice/rendu/$parole pptx
+	done
+	cd /home/fabrice/rendu/
+	mkdir pptx md
+	mv *.pptx pptx
+	mv *.md md
+elif  [ "$1" == "create" ]; then
+	# TODO: format the given $@ input to $@.md
+	shift
+	title=$(echo $@ | tr ' ' '_')
+	touch $parolespath/$title.md
+	vim $parolespath/$title.md
+elif  [ "$1" == "view" ]; then
+	cd $parolespath
+	paroles=$(ls $parolespath | rofi -multi-select -dmenu)
+	for parole in $paroles;
+	do
+		compmd $parolespath/$parole pptxv
+	done
+elif  [ "$1" == "edit" ]; then
+	cd $parolespath
+	parole=$(ls $parolespath | rofi -dmenu)
+	vim $parole
+elif  [ "$1" == "-h" ]; then
+	echo "
+get -> move selected songs to rendu and convert them
+create -> create a new song
+view -> view an actual song
+edit -> edit the selected parole
+"
+else
+	echo "commande not found"
+fi
+#!/bin/bash

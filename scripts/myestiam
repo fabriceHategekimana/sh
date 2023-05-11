@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://estiam.schooltech.fr/fr/user_intervenant/login &
+

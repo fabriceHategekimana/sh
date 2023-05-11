@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#generate the ssh-key
+ssh-keygen -t rsa -b 4096 -C "$1"
+#run the ssh agent
+eval "$(ssh-agent -s)"
+#add the ssh key to the ssh agent
+ssh-add ~/.ssh/id_rsa
+#copy the ssh key to clipboard
+xclip -sel clip < ~/.ssh/id_rsa.pub

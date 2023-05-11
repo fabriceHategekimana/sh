@@ -1,0 +1,6 @@
+#!/bin/bash
+i3-msg workspace 9
+cd /home/fabrice/.config/i3/
+bash generator.sh
+i3-msg restart
+i3-msg workspace "1: "

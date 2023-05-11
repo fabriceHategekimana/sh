@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# $1 subject
+# $2... content
+
+actualDate=$(date +%Y-%m-%d\ %H:%M:%S)
+subject=$1
+shift
+
+echo "$actualDate,[$subject],$@" >> ~/note/log.csv
+

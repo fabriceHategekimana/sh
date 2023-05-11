@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ls -t ~/Vidéos/obs/*.mp4 ~/Vidéos/obs/*.mkv >> ~/Vidéos/obs/ordered.txt
+
+kitty vim /home/fabrice/Vidéos/obs/ordered.txt
+
+for line in $(tac /home/fabrice/Vidéos/obs/ordered.txt); do 
+	touch $line
+   	sleep 0.1;
+done
+
+rm /home/fabrice/Vidéos/obs/ordered.txt

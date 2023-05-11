@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then
+	echo "ERROR: You must specify a binary name"
+else
+	#cp /urs/bin/
+	#sudo rm $1
+	#sudo ln -s /home/fabrice/install/i3/builddir/$1
+fi

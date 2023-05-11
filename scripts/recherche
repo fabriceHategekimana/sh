@@ -1,0 +1,5 @@
+#!/bin/bash
+
+term="${@// /%20}"
+
+firefox "https://slsp-unige.primo.exlibrisgroup.com/discovery/search?query=any,contains,$term&tab=41SLSP_UGE_MyInst_CI&search_scope=MyInst_and_CI&vid=41SLSP_UGE:VU1&offset=0" &

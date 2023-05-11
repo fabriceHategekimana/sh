@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s azeem -n notebook
+tmux send-keys -t azeem 'vim /home/fabrice/sessions/projet/azeem/note.md' Enter

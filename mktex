@@ -1,0 +1,46 @@
+#!/bin/bash
+. ~/sh/environmentGenerator.sh
+
+#si on a ajouter le paramêtre "-d" alors on crée un dossier sinon, on crée sur place
+if [ "$1" == "-d" ]; then
+	NOM=$2
+	mkdir $NOM
+	cd $NOM
+else
+	NOM=$1
+fi
+
+
+touch $NOM.tex
+if [ ! -d "images" ]; then
+	mkdir images
+fi
+echo "
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{mulitcol}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage[ backend=bibtex,style=numeric]{biblatex}
+\bibliography{NomDuFichierExportéDeZotero.bib} ]
+\usepackage{tikz}
+\usetikzlibrary{ shapes.geometric, arrows}
+\usepackage[legalpaper, portrait, margin=1in]{geometry}
+\graphicspath{{./images/}}
+
+\tikzstyle{boite}= [rectangle, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=white]
+\tikzstyle{fleche} = [thick,->,>=stealth]
+\tikzstyle{ligne} = [thick,-,>=stealth]
+
+\begin{document}
+		\title{$NOM}
+		\date{$(date +"%d %B %Y")}
+		\author{Fabrice Hategekimana}
+		\maketitle
+ 	$NOM 
+\end{document}
+
+" > $NOM.tex
+

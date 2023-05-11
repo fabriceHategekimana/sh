@@ -1,0 +1,9 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [module_number=""]	{
+	if $module_number != "" {
+		firefox $"https://www.modulbaukasten.ch/?q=($module_number)"
+	} else {
+		firefox $"https://www.modulbaukasten.ch"
+	}
+}

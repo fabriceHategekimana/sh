@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s déclaration -n notebook
+tmux send-keys -t déclaration 'vim /home/fabrice/sessions/projet/déclaration/note.md' Enter

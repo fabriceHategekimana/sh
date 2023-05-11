@@ -1,0 +1,26 @@
+#!/bin/bash
+
+templates=~/note/templates
+
+function select_template {
+	result=$(ls $templates | rofi -dmenu)
+	echo $result
+}
+
+function create_template {
+	read -p "Enter the new template's name (with the extention): " name
+	touch ~/note/templates/$name
+	vim ~/note/templates/$name
+}
+
+
+if [[ -z "$1" ]]; then
+	echo /home/fabrice/note/templates/$(ls /home/fabrice/note/templates/ | rofi -dmenu)
+elif [[ "$1" == "new" || "$1" == "create" ]]; then
+	create_template
+elif [[ "$1" == "edit" ]]; then
+	result=$(select_template)
+	vim $templates/$result
+elif [[ "$1" == "lf" ]]; then
+	lf $templates
+fi

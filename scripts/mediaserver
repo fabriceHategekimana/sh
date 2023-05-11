@@ -1,0 +1,6 @@
+#!/bin/bash
+firefox -new-tab https://mediaserver.unige.ch/Utilisateurs/shiblogin &
+
+#!/bin/bash
+firefox -new-tab https://mediaserver.unige.ch/ &
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s aei -n notebook
+tmux send-keys -t aei 'vim /home/fabrice/sessions/projet/aei/note.md' Enter

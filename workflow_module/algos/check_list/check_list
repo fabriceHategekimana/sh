@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# création d'une check_list
+cp ~/note/templates/check_list.md .
+# ouverture de la check_list
+tmux new-window -n "check_list" vim check_list.md

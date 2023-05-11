@@ -1,0 +1,5 @@
+#!/bin/bash
+
+query=$(echo $@ | sed -e "s/ /+/g")
+
+firefox -new-tab https://www.youtube.com/results?search_query=$query

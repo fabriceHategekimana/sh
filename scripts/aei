@@ -1,0 +1,4 @@
+#!/bin/bash
+firefox -new-tab https://outlook.unige.ch/owa/aei-cui@unige.ch/#path=/mail &
+
+kitty --class="floating" vim /home/fabrice/note/projets/AEI.md

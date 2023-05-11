@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s prière -n notebook
+tmux send-keys -t prière 'vim /home/fabrice/sessions/projet/prière/note.md' Enter

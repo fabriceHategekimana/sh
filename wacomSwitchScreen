@@ -1,0 +1,7 @@
+#!/bin/bash
+#switch screen
+for i in $(xsetwacom list devices | grep -e "id: \w\w" -o | sed "s/id: \(\w\w\)/\1/");
+do
+	xsetwacom set "$i" MapToOutPut next
+done
+

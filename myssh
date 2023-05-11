@@ -1,0 +1,23 @@
+#!/bin/bash
+cd ~/.ssh
+rm id_rsa id_rsa.pub
+if [ "$1" == "uni" ]; then
+	cp uni/* .
+elif [ "$1" == "satom" ]; then
+	cp satom/* .
+elif [ "$1" == "github" ]; then
+	cp github/* .
+elif [ "$1" == "github2" ]; then
+	cp github2/* .
+elif [ "$1" == "estiam" ]; then
+	cp estiam/* .
+elif [ "$1" == "-h" ]; then
+    echo "
+uni => load key fof gitlab
+github => load personnal key
+github2 => load personnal key
+satom => load key from satom
+-h => show this help menu
+    "
+fi
+ls

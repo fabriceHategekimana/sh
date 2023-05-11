@@ -1,0 +1,4 @@
+#!/bin/bash
+firefox -new-tab https://keep.google.com/u/0/ &
+
+#!/bin/bash

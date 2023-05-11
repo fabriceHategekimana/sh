@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source ~/sh/workflow_module/algos/algo_module
+
+get_template vidéo.json
+new_window vidéo vim vidéo.json

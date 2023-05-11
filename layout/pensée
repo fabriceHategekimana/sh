@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s pensée -n notebook
+tmux send-keys -t pensée 'vim /home/fabrice/sessions/projet/pensée/note.md' Enter

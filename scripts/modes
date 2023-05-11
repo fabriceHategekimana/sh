@@ -1,0 +1,5 @@
+#!/bin/bash
+
+selectedmode=$(ls /home/fabrice/.config/i3/modes/ | rofi -dmenu)
+
+i3-msg mode "$selectedmode"

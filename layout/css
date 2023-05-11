@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s css -n notebook
+tmux send-keys -t css 'vim /home/fabrice/sessions/projet/css/note.md' Enter

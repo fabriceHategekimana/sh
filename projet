@@ -1,0 +1,4 @@
+#!/bin/bash
+tmux rename-session projet
+cd ~/note/projets/
+vim projets.md

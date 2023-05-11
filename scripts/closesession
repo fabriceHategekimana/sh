@@ -1,0 +1,19 @@
+#!/bin/bash
+# close the actual i3 session
+
+# the exit keybinding
+xdotool key alt+shift+e
+
+screen_number=$(xrandr -q | grep "^[^ ]\+ connected" | sed "s/^\([^ ]\+\) .*/\1/" | wc -l)
+
+if [ "2" == "$screen_number" ]; then
+	xdotool mousemove 1834 1066 
+else
+	xdotool mousemove 1834 56 
+fi
+
+# the mouse action (point and click)
+xdotool click 1
+xdotool click 1
+xdotool click 1
+

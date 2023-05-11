@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set_rofi_theme(){
+	cd /home/fabrice/.config/rofi/
+	rm colors
+	echo "
+	foreground:                  $(get_color "leadcolor"); /* leadcolor */
+	background:                  $(get_color "background"); /* background */
+	" >> colors
+
+	./generator.sh
+}

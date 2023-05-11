@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set_feh_theme(){
+	echo "
+#!/bin/bash
+feh --bg-scale $backgroundimage
+" > ~/sh/background
+}

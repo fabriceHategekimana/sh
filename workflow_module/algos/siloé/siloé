@@ -1,0 +1,24 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+presences=labs/présences
+programmes=labs/programmes
+
+# get the presence template
+get_template présence.md
+mv présence.md $presences
+cd $presences
+numerote présence.md
+renamed_presence=$(ls -t | head -n 1)
+cd ../..
+
+# get the programme template
+get_template programme.md
+mv programme.md $programmes
+cd $programmes
+numerote programme.md
+renamed_programme=$(ls -t | head -n 1)
+cd ../..
+
+
+new_window présence vim -p $presences/$renamed_presence $programmes/$renamed_programme

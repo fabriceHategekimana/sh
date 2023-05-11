@@ -1,0 +1,21 @@
+@startuml
+scale 10
+allowmixing
+
+actor Fabrice
+
+object morales {
+}
+
+object règles {
+}
+
+object messages {
+}
+
+morales -> règles
+règles -> messages
+
+Fabrice -> morales : find morales
+
+@enduml

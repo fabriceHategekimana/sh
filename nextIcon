@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#move and select the last diapositiv
+xdotool mousemove 230 940 
+xdotool click 1
+# duplicate
+xdotool key ctrl+d
+# move and click the center
+xdotool mousemove 954 574
+xdotool click 1
+# delete the image in the center
+xdotool key --delay 200 Delete Delete
+
+# move to icons
+xdotool mousemove 774 159
+xdotool click 1

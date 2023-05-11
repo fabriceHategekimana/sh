@@ -1,0 +1,9 @@
+#!/bin/bash
+
+noextention=$(echo $1 | sed 's/\(\w\+\)\.\w\+/\1/')
+
+if [[ "$#" == "1" ]]; then
+	ffmpeg -ss 00:00:00 -t 60 -i $1 -c:v libx264 -profile:v baseline -level 3.0 $noextention.mp4
+elif [[ "$#" == "3" ]]; then
+       ffmpeg -ss $2 -to $3 -i $1 ${noextention}_extrait.mp4
+fi

@@ -1,0 +1,161 @@
+#! /bin/python3
+import pdfplumber
+import pandas as pd
+import sys
+
+# keys: ['text', 'x0', 'x1', 'top', 'doctop', 'bottom', 'upright', 'direction']
+
+
+def get_coords_and_content(word):
+    return [word["x0"], word["top"], word["text"]]
+
+
+def get_x_from_name(df, name):
+    return df.query(f"content == '{name}'")[["x"]].iloc[0, 0]
+
+
+def get_y_from_name(df, name):
+    df = df.query(f"content == '{name}'")[["y"]]
+    if not df.empty:
+        return df.iloc[0, 0]
+    else:
+        return None
+
+
+def get_table_header(df):
+    return get_y_from_name(df, "Date")
+
+
+def get_x_columns(df):
+    # On ne prend pas la solde
+    return {"Date": get_x_from_name(df, "Date"),
+            "Description": get_x_from_name(df, "Description"),
+            "Valeur": get_x_from_name(df, "Valeur"),
+            "Débit": get_x_from_name(df, "Débit"),
+            "Crédit": get_x_from_name(df, "Crédit"),
+            "CHF": get_x_from_name(df, "CHF")}
+
+
+def extract_by_x_interval(start, offset, end, offset2, columns_pos, page_content):
+    interval = [columns_pos[start]+offset, columns_pos[end]+offset2]
+    return page_content.query(f"x >= {interval[0]} and x <= {interval[1]}")
+
+
+def extract_by_y_interval(start, offset, end, offset2, columns_pos, page_content):
+    interval = [columns_pos[start]+offset, columns_pos[end]+offset2]
+    return page_content.query(f"y >= {interval[0]} and y <= {interval[1]}")
+
+
+def get_table_content_and_columns_pos(page_content):
+    table_header = get_table_header(page_content)
+    if table_header is not None:
+        columns_pos = get_x_columns(page_content)
+        date = extract_by_x_interval("Date", 0, "Date", 0, columns_pos, page_content)
+        valeur = extract_by_x_interval("Valeur", 0, "Valeur", 0, columns_pos, page_content)
+        credit = extract_by_x_interval("Crédit", -15, "Crédit", 6, columns_pos, page_content)
+        debit = extract_by_x_interval("Débit", -15, "Débit", 6, columns_pos, page_content)
+        description = extract_by_x_interval("Description", 0, "Valeur", -1, columns_pos, page_content)
+        return pd.concat([date, valeur, credit, debit, description]), columns_pos
+    else:
+        return None, None
+
+
+def get_lines(table_content):
+    return table_content.y.unique()
+
+
+def get_elements_from_line(table_content, line):
+    return table_content.query(f"y == {line}").sort_values(by=["x"])
+
+
+def create_descriptions(df):
+    description = ""
+    for index, row in df.sort_index().iterrows():
+        description += " "+row["content"]
+    return pd.Series([[0, 0, description[1:]]])
+
+
+def put_in_row(row, line):
+    if not line.empty:
+        row.append(line.values[0][2])
+    else:
+        row.append(0)
+    return row
+
+
+def create_row(rows, columns_pos):
+    # extract_by_interval(start, offset, end, offset2, columns_pos, page_content):
+    row = []
+    date = extract_by_x_interval("Date", 0, "Date", 0, columns_pos, rows)
+    put_in_row(row, date)
+    description = create_descriptions(extract_by_x_interval("Description", 0, "Valeur", -1, columns_pos, rows))
+    put_in_row(row, description)
+    valeur = extract_by_x_interval("Valeur", 0, "Valeur", 0, columns_pos, rows)
+    put_in_row(row, valeur)
+    debit = extract_by_x_interval("Débit", -15, "Débit", 6, columns_pos, rows)
+    put_in_row(row, debit)
+    credit = extract_by_x_interval("Crédit", -15, "Crédit", 6, columns_pos, rows)
+    put_in_row(row, credit)
+    return row
+
+
+def create_dataframe(table_content, columns_pos):
+    csv = []
+    lines = get_lines(table_content)
+    for line in lines:
+        elements = get_elements_from_line(table_content, line)
+        row = create_row(elements, columns_pos)
+        csv.append(row)
+    df = pd.DataFrame(csv, columns=["Date", "Description", "Valeur", "Débit", "Crédit"])
+    return df.query("Description != 0 and Valeur != 0 and Date != \"Date\"")
+
+
+def get_page_content(page):
+    array2D = list(map(get_coords_and_content, page.extract_words()))
+    return pd.DataFrame(array2D, columns=["x", "y", "content"])
+
+
+def to_dataframe(page):
+    page_content = get_page_content(page)
+    table_content, columns_pos = get_table_content_and_columns_pos(page_content)
+    if table_content is not None:
+        return create_dataframe(table_content, columns_pos)
+    else:
+        return pd.DataFrame([], columns=["Date", "Valeur", "Crédit", "Débit", "Description"])
+
+
+def get_solde(pdf_file):
+    df = get_page_content(pdf_file.pages[0])
+    y = get_y_from_name(df, "nouveau")
+    columns_pos = get_x_columns(df)
+    elements = get_elements_from_line(df, y)
+    return extract_by_x_interval("CHF", -29, "CHF", 0, columns_pos, elements).iloc[0, 2]
+
+
+def get_solde_array(solde, total):
+    solde_array = []
+    solde = float(solde.replace("'", ""))
+    for index, row in total.iterrows():
+        solde = round(solde+row["Crédit"]-row["Débit"], 2)
+        solde_array.append(solde)
+    return solde_array
+
+
+def main():
+    # Début du code
+    with pdfplumber.open(sys.argv[1]) as temp:
+        pages = []
+        for page in temp.pages:
+            pages.append(to_dataframe(page))
+        total = pd.concat(pages).query("Date != 0")
+        total["Crédit"] = total["Crédit"].astype(str).map(lambda x: x.replace("'", "")).astype(float).abs()
+        total["Débit"] = total["Débit"].astype(str).map(lambda x: x.replace("'", "")).astype(float).abs()
+        # première page:
+        solde = get_solde(temp)
+        solde_array = get_solde_array(solde, total)
+        total.insert(5, "Solde", solde_array)
+        # CHF_pos = get_x_from_name(page_content, "CHF")
+        total.to_csv(sys.argv[2], index=False)
+
+
+main()

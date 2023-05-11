@@ -1,0 +1,6 @@
+#!/bin/bash
+/home/fabrice/sh/tomp3 $1
+
+/home/fabrice/sh/sendviabluetooth ${1%.*}.mp3
+
+rm ${1%.*}.mp3

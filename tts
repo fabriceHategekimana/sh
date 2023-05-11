@@ -1,0 +1,14 @@
+#!/bin/bash
+firefox -new-window https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/#features
+sleep 6
+text=$(cat $1)
+echo "start writing"
+sleep 1
+xdotool mousemove 1240 1780 
+xdotool click 1
+xdotool key ctrl+a 
+xdotool type "$text"
+echo "finished"
+xdotool mousemove 1641 1968
+xdotool click 1
+sleep 5

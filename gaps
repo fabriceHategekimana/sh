@@ -1,0 +1,15 @@
+#!/bin/bash
+
+i3file=/home/fabrice/.config/i3/config
+
+val=$(cat $i3file | grep "gaps inner")
+
+if [ "$val" == "gaps inner 0" ]; then
+		sed -i -e "s/gaps inner 0/gaps inner 15/" $i3file
+		sed -i -e "s/gaps outer 0/gaps outer 15/" $i3file
+else
+		sed -i -e "s/gaps inner 15/gaps inner 0/" $i3file
+		sed -i -e "s/gaps outer 15/gaps outer 0/" $i3file
+fi
+
+i3-msg restart

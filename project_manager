@@ -1,0 +1,34 @@
+#!/bin/bash
+
+projectpath=/home/fabrice/sessions/projet
+layoutpath=/home/fabrice/sh/layout
+infopath=/home/fabrice/sh/info
+
+get_action(){
+	echo " 
+open
+delete
+action
+exit" | fzf 
+}
+
+while [ true ]
+do
+	#get name	
+	name=$(ls $layoutpath | fzf)
+	if [[ "$name" != "" ]]; then
+		action=$(get_action)
+		if [[ "$action" == "open" ]]; then
+		    $layoutpath/$name
+		elif [[ "$action" == "delete" ]]; then
+			rm -dr $projectpath/$name
+			rm $layoutpath/$name
+		elif [[ "$action" == "info" ]]; then
+			cat $infopath/$name
+		elif [[ "$action" == "exit" ]]; then
+			exit
+		else
+			echo "non existant info!"
+		fi
+	fi
+done

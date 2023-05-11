@@ -1,0 +1,5 @@
+#!/bin/bash
+
+systemctl start nessusd.service &
+sleep 3
+firefox https://127.0.0.1:8834/#/

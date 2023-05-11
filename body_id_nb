@@ -1,0 +1,9 @@
+#!/home/fabrice/.cargo/bin/nu
+
+#+++ {"id": "aND5uE4gw8CZ"}
+
+def	main [] {
+	let id = (/home/fabrice/sh/id_generator)
+	echo $"+++ {\"id\": \"($id)\"}"
+} 
+

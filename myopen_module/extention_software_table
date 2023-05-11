@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function get_software {
+	echo "$(python3 /home/fabrice/sh/myopen_module/extension_software_manager.py $1)"
+}

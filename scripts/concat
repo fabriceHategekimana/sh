@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/Vidéos/obs/
+~/sh/concat

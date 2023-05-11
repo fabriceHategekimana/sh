@@ -1,0 +1,21 @@
+#!/bin/bash
+
+module=~/sh/workflow_module
+
+function parse {
+	echo $(python3 ~/sh/workflow_module/parse.py $@)
+}
+
+function get_algo {
+	ls $module/algos 
+}
+
+function create_algo {
+	read -p "Enter the new algo's name: " name
+	mkdir $module/algos/$name
+	touch $module/algos/schema.puml
+	cp ~/note/templates/bash $module/algos/$name/$name
+	chmod +x $module/algos/$name/$name
+	vim $module/algos/$name/$name
+}
+

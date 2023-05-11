@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def	main [] {
+	tmux display -p '\#{session_name}:\#{window_name}.1' | save -f /home/fabrice/.config/lf/panetarget
+	tmux split-window -p 22 -h -b /home/fabrice/sh//lf -command one
+}

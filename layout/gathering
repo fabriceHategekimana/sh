@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s gathering -n notebook
+tmux send-keys -t gathering 'vim /home/fabrice/sessions/projet/gathering/note.md' Enter

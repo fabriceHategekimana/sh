@@ -1,0 +1,11 @@
+#!/home/fabrice/.cargo/bin/nu
+
+#```{code-cell} ipython3
+#:id: NcbFtIT23htk
+#import numpy, pandas, matplotlib, nltk
+#```
+
+def	main [] {
+	let id = (/home/fabrice/sh/id_generator)
+	echo $":id: ($id)"
+} 

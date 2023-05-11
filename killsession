@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# get actual session name
+session_name=$(tmux run 'echo #{session_name}')
+
+tmux attach-session -t $0
+
+# kill the previous session
+tmux kill-session -t "$session_name"
+
+
+xdotool type "tmux a"
+sleep 0.2
+xdotool key Return

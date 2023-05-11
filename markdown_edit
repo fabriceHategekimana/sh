@@ -1,0 +1,20 @@
+#!/bin/bash
+image=$(medit $@)
+image=${image//\"/}
+
+name=${image##*/}
+uniquename=${name:0:(-4)}
+noextension=${image:0:(-4)}
+
+if [[ -f "${noextension}.puml" ]]; then
+	tmux new-window -n "$uniquename" vim ${noextension}.puml
+elif [[ -f "${noextension}.xcf" ]]; then
+	gimp ${noextension}.xcf
+elif [[ -f "${noextension}.py" ]]; then
+	tmux new-window -n "$uniquename" vim ${noextension}.py
+elif [[ -f "${noextension}.odg" ]]; then
+	libreoffice $image
+else
+	echo "sorry no executable found"
+fi
+

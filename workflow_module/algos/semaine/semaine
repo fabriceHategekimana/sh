@@ -1,0 +1,5 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+backup semaine.md semaines
+new_window semaine vim semaine.md

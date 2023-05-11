@@ -1,0 +1,4 @@
+#!/bin/bash
+
+kitty --class="floating" vim /home/fabrice/note/projets/infos.md
+

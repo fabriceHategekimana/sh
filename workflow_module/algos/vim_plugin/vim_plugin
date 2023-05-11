@@ -1,0 +1,25 @@
+#!/bin/bash
+source ~/sh/workflow_module/algos/algo_module
+
+notify-send "langage name?"
+name=$(rofi -dmenu)
+
+notify-send "extension name?"
+extension=$(rofi -dmenu)
+
+get_template vim-client
+
+mv vim-client ~/vim/$name-client
+
+cd ~/vim/$name-client/plugin
+
+mv vim-client.vim $name-client.vim
+
+upper_letter_name=$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}
+
+
+sed -i "s/Smallname/$name/" $name-client.vim
+sed -i "s/Name/$upper_letter_name/" $name-client.vim
+sed -i "s/Extension/$extension/" $name-client.vim
+
+new_window $name-plugin vim $name-client.vim

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source ~/sh/workflow_module/algos/algo_module
+
+get_template support_de_cours.md
+
+touch toc.md
+
+new_window support_de_cours vim support_de_cours.md
+

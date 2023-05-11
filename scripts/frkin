@@ -1,0 +1,13 @@
+#!/bin/bash
+
+firefox https://translate.google.com/?hl=rw&sl=fr&tl=rw&text=$@&op=translate &
+
+link="https://translate.google.com/?hl=rw&sl=fr&tl=rw&text=$@&op=translate &"
+
+echo $link | xclip -sel clip
+sleep 2
+xdotool key ctrl+l
+sleep 0.4
+xdotool key ctrl+v
+sleep 0.3
+xdotool key Return

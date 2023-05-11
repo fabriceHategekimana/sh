@@ -1,0 +1,4 @@
+#!/bin/bash
+tmux new-window -n "temp" -c "/home/fabrice/temp"
+
+

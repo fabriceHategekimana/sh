@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir /home/fabrice/sessions/projet/$1
+cp /home/fabrice/note/templates/project.md /home/fabrice/sessions/projet/$1/note.md
+cp /home/fabrice/note/templates/layout /home/fabrice/sh/layout/$0
+
+

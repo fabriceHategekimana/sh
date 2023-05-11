@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [module_number=""]	{
+	firefox https://www.modulbaukasten.ch/?d=Cyber-Security-Specialist-BF
+}
+
