@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set_vim_theme(){
+	rm /home/fabrice/vim_plugins/colors.vim
+	 
+	echo "
+	hi PreProc guifg=$(get_color "blue") guibg=NONE gui=NONE cterm=NONE \"imports
+	hi Special guifg=$(get_color "discretcolor") guibg=NONE gui=NONE cterm=NONE \"special characters ()::,;
+	hi Identifier guifg=#ffffff guibg=NONE gui=NONE cterm=NONE \"custom names
+	hi Function guifg=$(get_color "secondarycolor") guibg=NONE gui=NONE cterm=NONE
+	hi Constant guifg=$(get_color "yellow") guibg=NONE gui=NONE cterm=NONE \"Strings 
+	hi Normal guifg=$(get_color "foreground") guibg=$(get_color "background") gui=NONE cterm=NONE \"Must stay #000000
+	hi Type guifg=$(get_color "leadcolor") guibg=NONE gui=bold cterm=bold \"Type 
+	hi Comment guifg=$(get_color "commentcolor") guibg=NONE gui=NONE cterm=NONE
+	hi LineNr guifg=$(get_color "leadcolor") guibg=NONE gui=NONE cterm=NONE
+	hi Todo guifg=#ffffff guibg=#ff0000 gui=NONE cterm=NONE \"Todo
+	hi Pmenu guifg=#ffffff guibg=NONE gui=NONE cterm=NONE \"Menu for Hover
+	hi Title guifg=$(get_color "leadcolor") guibg=NONE gui=bold cterm=bold
+	hi Underlined guifg=$(get_color "blue") guibg=NONE gui=bold,underline cterm=underline
+	hi Search guifg=#ffffff guibg=$(get_color "commentcolor") gui=NONE cterm=NONE
+	" > /home/fabrice/vim_plugins/colors.vim
+
+	cat /home/fabrice/note/templates/vim_color_scheme/bottom >> /home/fabrice/vim_plugins/colors.vim
+
+	# remove the temporary file
+	#rm /home/fabrice/.config/nvim/lua/colorschemes/colors
+}

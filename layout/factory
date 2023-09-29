@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s factory -n notebook
-tmux send-keys -t factory 'vim /home/fabrice/sessions/projet/factory/note.md' Enter

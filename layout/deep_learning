@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s deep_learning -n notebook
+tmux send-keys -t deep_learning 'vim /home/fabrice/sessions/projet/deep_learning/note.md' Enter

@@ -38,7 +38,7 @@ elif [ "$2" == "image" ];  then
 	pandoc -t html5 --template=/home/fabrice/note/templates/reveal_single_slide.html --standalone --section-divs $1 -o $nomUnique.html
 	htmltopng $nomUnique.html $nomUnique.png
 elif [ "$2" == "jupyter" ];  then
-	jupyter-book myst init $1 --kernel python3
+	quarto convert $1
 elif [ "$1" == "-h" ];  then
     	echo "
 CONVERT MARKDOWN FILE

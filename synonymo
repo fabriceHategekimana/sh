@@ -1,0 +1,23 @@
+#! /usr/bin/python3
+
+from bs4 import BeautifulSoup
+import requests
+import sys
+
+
+def cleaning(word):
+    return word.replace("Ã©", "é").replace("Ãª", "ê").replace("Ã¢", "â")
+
+
+url = "http://www.synonymo.fr/synonyme/" + sys.argv[1]
+
+page = requests.get(url)
+
+soup = BeautifulSoup(page.text, "lxml")
+
+fiche = soup.find("div", class_="fiche")
+
+result = []
+
+for item in fiche.findAll("a", class_="word"):
+    print(cleaning(item.text))

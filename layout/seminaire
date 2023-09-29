@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s seminaire -n notebook
-tmux send-keys -t seminaire 'vim /home/fabrice/sessions/projet/seminaire/note.md' Enter

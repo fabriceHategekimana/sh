@@ -1,3 +1,3 @@
 #!/bin/bash
 tmux new-session -d -s typer -n notebook
-tmux send-keys -t typer 'vim /home/fabrice/sessions/projet/typer/note.md' Enter
+tmux send-keys -t typer 'nvim /home/fabrice/sessions/projet/typer/note.md' Enter

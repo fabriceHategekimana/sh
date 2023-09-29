@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s baptême -n notebook
+tmux send-keys -t baptême 'vim /home/fabrice/sessions/projet/baptême/note.md' Enter

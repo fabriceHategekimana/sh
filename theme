@@ -6,6 +6,7 @@ source ~/sh/theme_module/neofetch_theme
 source ~/sh/theme_module/zathura_theme
 source ~/sh/theme_module/rofi_theme
 source ~/sh/theme_module/background_theme
+source ~/sh/theme_module/vim_theme
 
 getThemeElement (){ 
 	cat /home/fabrice/themes/templates/$1 | sed -n "$2p" | sed -e "s/[^:]\+: \(.\+\)$/\1/" 
@@ -27,25 +28,26 @@ get_color (){
 				index=7 ;;
 			"discretcolor")
 				index=8 ;;
+			"yellow")
+				index=9 ;;
+			"blue")
+				index=10 ;;
 			*)
 				echo "choose a color"
 	esac
 	getThemeElement $selectedtheme $index
 }
 
-#get_background_image(){
-	#getThemeElement $selectedtheme "backgroundimage"
-#}
 
 #selection de thèmes
 selectedtheme=$(ls /home/fabrice/themes/templates/ | rofi -dmenu)
 #selectedtheme=red.css
 
 #background image
-backgroundimage=$(getThemeElement $selectedtheme 9)
+backgroundimage=$(getThemeElement $selectedtheme 11)
 
 #background image
-opacity=$(getThemeElement $selectedtheme 10)
+opacity=$(getThemeElement $selectedtheme 12)
 
 # lancement des thèmes
 set_kitty_theme
@@ -54,5 +56,6 @@ set_neofetch_theme
 set_zathura_theme
 set_i3_theme
 set_rofi_theme
+set_vim_theme
 
 /home/fabrice/sh/scripts/generatei3

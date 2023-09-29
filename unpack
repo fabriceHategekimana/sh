@@ -22,4 +22,6 @@ elif [ "$extention" == "deb" ]; then
 	sudo apt-get -f install
 elif [ "$extention" == "rar" ]; then
 	unrar x $1
+elif [ "$extention" == "7z" ]; then
+	7za e $1
 fi

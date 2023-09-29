@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s soundness -n notebook
-tmux send-keys -t soundness 'vim /home/fabrice/sessions/projet/soundness/note.md' Enter

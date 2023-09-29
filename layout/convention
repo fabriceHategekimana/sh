@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s convention -n notebook
-tmux send-keys -t convention 'vim /home/fabrice/sessions/projet/convention/note.md' Enter

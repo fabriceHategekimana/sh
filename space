@@ -1,0 +1,3 @@
+#!/home/fabrice/.cargo/bin/nu
+
+du -d 1 | select path physical apparent | sort-by physical

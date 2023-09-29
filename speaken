@@ -1,1 +1,1 @@
-xclip -o | espeak -v en -s 150 
+xdotool key ctrl+c && xclip -o | espeak -v en -s 150 

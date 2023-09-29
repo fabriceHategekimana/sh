@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s media -n notebook
+tmux send-keys -t media 'vim /home/fabrice/sessions/projet/media/note.md' Enter

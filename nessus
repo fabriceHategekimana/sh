@@ -1,5 +1,12 @@
 #!/bin/bash
 
-systemctl start nessusd.service &
+sudo systemctl start nessusd.service &
 sleep 3
 firefox https://127.0.0.1:8834/#/
+
+
+ #- You can start Nessus Scanner by typing /bin/systemctl start nessusd.service
+ #- Then go to https://fabrice-ThinkPad-T14s-Gen-1:8834/ to configure your scanner
+
+# ACTIVATION CODE:
+# YGGX-AKZA-CXMC-SVZC-QKK8

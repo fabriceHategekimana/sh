@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s crowdsourcing -n notebook
+tmux send-keys -t crowdsourcing 'vim /home/fabrice/sessions/projet/crowdsourcing/note.md' Enter

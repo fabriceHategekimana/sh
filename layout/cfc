@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s cfc -n notebook
+tmux send-keys -t cfc 'vim /home/fabrice/sessions/projet/cfc/note.md' Enter

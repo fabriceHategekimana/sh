@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s rattrapage -n notebook
-tmux send-keys -t rattrapage 'vim /home/fabrice/sessions/projet/rattrapage/note.md' Enter

@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s caisse -n notebook
-tmux send-keys -t caisse 'vim /home/fabrice/sessions/projet/caisse/note.md' Enter

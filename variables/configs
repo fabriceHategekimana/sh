@@ -1,4 +1,5 @@
 i3 /home/fabrice/.config/i3/default
+cava /home/fabrice/.config/cava/config
 zellij /home/fabrice/.config/zellij/config.kdl
 tmux /home/fabrice/.tmux.conf
 vim /home/fabrice/.vimrc

@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s webattack -n notebook
-tmux send-keys -t webattack 'vim /home/fabrice/sessions/projet/webattack/note.md' Enter

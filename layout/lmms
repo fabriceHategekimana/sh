@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s lmms -n notebook
-tmux send-keys -t lmms 'vim /home/fabrice/sessions/projet/lmms/note.md' Enter

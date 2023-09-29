@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s entreprise_application -n notebook
-tmux send-keys -t entreprise_application 'vim /home/fabrice/sessions/projet/entreprise_application/note.md' Enter

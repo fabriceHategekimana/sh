@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s 7_heure_de_prière -n notebook
+tmux send-keys -t 7_heure_de_prière 'vim /home/fabrice/sessions/projet/7_heure_de_prière/note.md' Enter

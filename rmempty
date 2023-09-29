@@ -1,0 +1,7 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [] {
+	ls |
+	where size == 0mb |
+	each { |x| rm $x.name }
+}

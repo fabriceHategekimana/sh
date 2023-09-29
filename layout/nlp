@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s nlp -n notebook
+tmux send-keys -t nlp 'vim /home/fabrice/sessions/projet/nlp/note.md' Enter

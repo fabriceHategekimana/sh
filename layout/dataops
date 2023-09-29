@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s dataops -n notebook
-tmux send-keys -t dataops 'vim /home/fabrice/sessions/projet/dataops/note.md' Enter

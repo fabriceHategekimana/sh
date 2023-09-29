@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s conseil_ecclesiastique -n notebook
+tmux send-keys -t conseil_ecclesiastique 'vim /home/fabrice/sessions/projet/conseil_ecclesiastique/note.md' Enter

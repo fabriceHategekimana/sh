@@ -1,7 +1,7 @@
 #!/bin/python3
 import sys
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 def ask(prompt):

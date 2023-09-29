@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p /home/fabrice/vim_plugins/$1-client/plugin
+touch /home/fabrice/vim_plugins/$1-client/README.md
+touch /home/fabrice/vim_plugins/$1-client/plugin/$1-client.vim
+
+nvim /home/fabrice/vim_plugins/$1-client/plugin/$1-client.vim
+
+echo " Plug '/home/fabrice/vim_plugins/$1-client/'" | xclip -selection clipboard

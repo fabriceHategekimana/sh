@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/home/fabrice/.cargo/bin/nu
 
-# $1 subject
-# $2... content
+use /home/fabrice/sh/game_src/event_logger.nu
 
-actualDate=$(date +%Y-%m-%d\ %H:%M:%S)
-subject=$1
-shift
-
-echo "$actualDate,[$subject],$@" >> ~/note/log.csv
-
+def main [verb: string, content: string] {
+	if $verb == "add" {
+		event_logger add_event $content "log"
+	} else if $verb == "show" {
+		if $content == "all" {
+			event_logger get_log
+		}
+	}
+}

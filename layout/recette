@@ -1,3 +1,3 @@
 #!/bin/bash
 tmux new-session -d -s recette -n notebook
-tmux send-keys -t recette 'vim /home/fabrice/sessions/projet/recette/note.md' Enter
+tmux send-keys -t recette 'nvim /home/fabrice/sessions/projet/recette/note.md' Enter

@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s metaheuristique -n notebook
+tmux send-keys -t metaheuristique 'vim /home/fabrice/sessions/projet/metaheuristique/note.md' Enter

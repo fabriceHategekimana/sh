@@ -1,3 +1,2 @@
 #!/bin/bash
-firefox -new-tab https://www.youtube.com/watch?v=7NOSDKb0HlU &
-
+firefox -new-tab https://www.youtube.com/watch?v=lP26UCnoH9s &

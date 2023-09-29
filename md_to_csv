@@ -1,0 +1,7 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [name: string] {
+	open $name | split row "\n" | str replace -a "^\\| " "" | str replace -a " \\|$" "" | filter { |x| $x !~ "-\\|-" } | str replace -a "\\|" "," | to text | save -f $"($name | str replace 'md' 'csv')"
+	open $"($name | str replace 'md' 'csv')"
+}
+

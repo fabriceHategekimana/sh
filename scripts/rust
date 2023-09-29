@@ -1,3 +1,5 @@
 #!/bin/bash
-firefox -new-tab https://crates.io/search?q=$1 &
+#firefox -new-tab https://crates.io/search?q=$1 &
+
+firefox -new-tab https://www.codewars.com/kata/search/rust?q=&r%5B%5D=-8&xids=completed&order_by=sort_date%20desc &
 

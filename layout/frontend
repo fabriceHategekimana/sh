@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s frontend -n notebook
-tmux send-keys -t frontend 'vim /home/fabrice/sessions/projet/frontend/note.md' Enter

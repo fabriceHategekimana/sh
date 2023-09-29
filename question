@@ -1,0 +1,82 @@
+#!/home/fabrice/.cargo/bin/nu
+
+use /home/fabrice/sh/nu_modules/table.nu
+
+def my_print [text: string] {
+	print ""
+	print "--------------------"
+	print $text
+	print "--------------------"
+	print ""
+}
+
+def get_word [response: string] {
+	let words = ($response | split words)
+	$words | get (random dice -s (($words | length) - 1)).0
+}
+
+def long_question [response: string] {
+	let word = (get_word $response)
+	let hidden = ($word | str replace -a "[0-9a-zA-Z]" "X")
+	let res = ($response | str replace -a $word $hidden)
+	{question: $res, response: $word, hidden: $hidden}
+}
+
+def smallest_score [] {
+	open "questions.csv" | get score | math min
+}
+
+def get_priority [] {
+	open "questions.csv" | where score <= (smallest_score) + 1
+}
+
+def quizz [] {
+	let len = (get_priority | where response != "" | length)
+	mut r = 0
+	while true {	
+		$r = (random dice -s $len).0 - 1
+		let question_row = (get_priority | where response != "" | get $r)
+		let question_response = (long_question $question_row.response)
+		print $question_row.question
+		print $question_response.question
+		let user_response = (gum input $"--placeholder=($question_response.hidden)")
+		if $user_response == $question_response.response {
+			table increment2 "questions.csv" "question" $question_row.question "score" 1
+			my_print "GOOD RESPONSE !"
+		} else {
+			table decrement2 "questions.csv" "question" $question_row.question "score" 1
+			my_print "BAD RESPONSE !"
+			print $"The good response is \"($question_response.response)\""
+		}
+	}
+}
+
+def contextual_menu [] {
+	let question = (open questions.csv | get question | to text | gum filter)
+	print "What do you want to modify ?"
+	let action = (echo "question\nresponse" | gum choose)
+	let my_row = (table get_row	"questions.csv" "question" $question | get $action)
+	let res = (gum write $"--value=($my_row)")
+	table change2 "questions.csv" "question" $question $action $res
+	open questions.csv
+}
+
+
+def main [question="select"] {
+	table create_if_not_exist "questions.csv"
+	if ($question == "quizz") {
+		quizz
+	} else if ($question == "show") {
+		open "questions.csv" 
+	} else if ($question == "delete") {
+		print "delete not implemented yet"
+		print "\"delete [column] [arg]\""
+#delete "questions.csv"	
+	} else if ($question == "help") {
+		print "arguments: [show, delete, quizz, help, [question]]"
+	} else if ($question == "select") {
+		contextual_menu
+	} else {
+		table add2 "questions.csv" {question: $question, response: "", type: "long"}	
+	}
+}

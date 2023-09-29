@@ -1,2 +1,2 @@
 #!/bin/bash
-kitty --class floating vim ~/temp/$1.md
+kitty --class floating vim ~/note/floating_window_notes/note.md

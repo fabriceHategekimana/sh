@@ -1,0 +1,12 @@
+@startuml
+scale 10
+
+actor me
+
+' créer des tâches
+' marquer les tâches comme faites
+' créer des projets (groupe de tâches)
+' voir les stats:
+'	voir la bar de progression
+
+@enduml

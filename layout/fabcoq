@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s fabcoq -n notebook
-tmux send-keys -t fabcoq 'vim /home/fabrice/sessions/projet/fabcoq/note.md' Enter

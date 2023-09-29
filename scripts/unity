@@ -1,0 +1,2 @@
+#!/bin/bash
+gnome-software --details com.unity.UnityHub
