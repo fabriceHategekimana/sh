@@ -27,3 +27,4 @@ def main [argument] {
 		create_jours $syllabus
 	}
 }
+

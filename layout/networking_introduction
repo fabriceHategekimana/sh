@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s networking_introduction -n notebook
+tmux send-keys -t networking_introduction 'nvim /home/fabrice/sessions/projet/networking_introduction/note.md' Enter

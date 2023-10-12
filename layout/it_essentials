@@ -1,0 +1,3 @@
+#!/bin/bash
+tmux new-session -d -s it_essentials -n notebook
+tmux send-keys -t it_essentials 'vim /home/fabrice/sessions/projet/it_essentials/note.md' Enter

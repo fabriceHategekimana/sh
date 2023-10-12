@@ -13,7 +13,7 @@ cp ~/lmms/projects/Man_of_your_word_extended.mp3 ~/production
 
 cd ~/production
 
-ffmpeg -i Pub.mkv -i Intro.mp4 -i output.mkv -i Man_of_your_word_extended.mp3 -i Outtro.mp4 -filter_complex "[3:a]volume=volume=0.15[music];\
+ffmpeg -i Pub.mkv -i Intro.mp4 -i output.mkv -i Man_of_your_word_extended.mp3 -i Outtro.mp4 -filter_complex "[3:a]volume=volume=0.1[music];\
 	[2:a]volume=volume=1.5[voix];\
 	[voix][music]amerge=inputs=2[voix_music];\
 	[4:a]volume=volume=0.4[outro_volume];\
