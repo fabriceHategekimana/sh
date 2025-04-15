@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s piano -n notebook
-tmux send-keys -t piano 'nvim /home/fabrice/sessions/projet/piano/note.md' Enter

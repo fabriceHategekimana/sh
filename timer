@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #exécution du timer avec le temps donnée
 
 temps=$(( $1 * 60 ))

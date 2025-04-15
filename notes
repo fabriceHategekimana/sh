@@ -1,0 +1,77 @@
+#!/home/fabrice/.cargo/bin/nu
+const classes = "/home/fabrice/sessions/projet/estiam/src/classes.csv"
+
+module Points {
+	#type Points = list<int>
+
+	def get_value_from_field [data: record, field: string] -> float {
+		$data | get $field | into float
+	}
+
+	export def from [file_name: string] -> any {
+		let data = open $file_name
+		$data | columns | each {|col| get_value_from_field $data $col} | polars into-df
+	}
+
+	export def get_total [self: any, ponderation_file: any] -> float {
+		$self * $ponderation_file | polars sum | $in.0	
+	}
+}
+
+use Points
+
+# Init the evaluation documents "[name]/template.yaml"
+def	"main init" [init: string = "init", --name: string = "evaluation", --template: string = "template.yaml"] {
+	mkdir $name; mkdir $"($name)/src";
+	cp /home/fabrice/note/templates/evaluation/template.yaml $"($name)/($template)"
+}
+
+# compute notes inside the src folder
+def "main run" [--template_file: string = "template.yaml", --max_point: float = 10.0] {
+	if (is_valid_folder) {
+		let template = Points from $template_file   
+		let max_points = $template * $max_point | polars sum | $in.0
+		let points = ls src/*.yaml | get name | each {
+			|file| {
+				nom: (pretty_name $file),
+				points: (Points get_total (Points from $file) $template)}}
+		let res = $points | each {|x| {
+			nom: $x.nom,
+			points: $x.points,
+			note_6: (($x.points / $max_points) * 6.0),
+			note_20: (($x.points / $max_points) * 20.0)}}
+		$res | to csv | save -f notes.csv;
+		echo $res 
+	} else {
+		print $"Missing something: the 'src' folder or the '($template_file)' template file"
+		print "Try using the command: evaluation init"
+	}
+}
+
+# Display the list of all class
+# Project structure
+#├── src
+#│   └── [names].yaml
+#└── template.yaml
+
+# display all the existing classes
+def "main class ls" [] {
+	open $classes | get niveau
+}
+
+# Display the list of all class
+def "main classes" [] {
+	main class ls
+}
+
+# Grade management command
+def	main [cmd: string | run ] { 
+}
+
+def is_valid_folder [] {
+	((ls | where name == src | where type == dir | length) == 1) and ((ls | where name =~ template.yaml | length) == 1)
+}
+
+def pretty_name [file_name: string] {
+	$file_name | str replace "src/" "" | str replace ".yaml" ""
+}

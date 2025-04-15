@@ -1,72 +1,56 @@
-#!/bin/bash
+#!/home/fabrice/.cargo/bin/nu
 
-if [ -z $1 ]; then
-	cd ~/sh/
-	file=$(fzf)
-	vim ~/sh/$file
-	cd 
-elif [ "$1" == "-s" ]; then 
-	cd ~
-	#on mémorise les alias
-	echo "$(alias)" > listeAlias.txt
-	#on compresse les notes, les scripts, python et les fichiers de configuration
-	mv ~/sh
-	zip -r configuration sh note python .bashrc .vimrc .tmux_conf listeAlias.txt
-	save configuration.zip
-elif [ "$1" == "-h" ]; then 
-	echo "
-	blank => wait to execute a commande 
-	-s => save all the command in a zip \"command.zip\" and send it to my personnal drive
-	-h => show the help menu	
-	create => create a new command with a dedicated script and a dedicated alias
-	search => go to the sh folder
-	other => create a command with the two first parameter (name, command)
-	"
-elif [ "$1" == "create" ];  then
-	cd ~/sh
-	touch $2
-	echo "#!/bin/bash" >> $2
-	chmod u+x $2
-	. ~/.bashrc
-	vim $2
-elif [ "$1" == "script" ];  then
-	cd ~/sh/scripts
-	touch $2
-	echo "#!/bin/bash" >> $2
-	chmod u+x $2
-	. ~/.bashrc
-	vim $2
-elif [ "$1" == "nushell" ];  then
-	cd ~/sh
-	touch $2
-	echo "#!/home/fabrice/.cargo/bin/nu" >> $2
-	chmod u+x $2
-	. ~/.bashrc
-	ln $2 $2.nu
-	vim $2.nu
-elif [ "$1" == "layout" ];  then
-	cd ~/sh/layout
-	touch $2
-	echo "#!/bin/bash" >> $2
-	chmod u+x $2
-	. ~/.bashrc
-	vim $2
-elif [ "$1" == "variable" ];  then
+# Save everything in the dot and git push
+def "main save" [] {
+	cd ~	
+	cp -f .vimrc .tmux_conf ~/sh/dot	
+}
+
+# install if it's the first time in the system
+def "main install" [] {
+		
+}
+
+# create a custom CLI command
+def "main create" [name: string] {
+	cd ~/sh	
+	touch $name
+	echo "#!/home/fabrice/.cargo/bin/nu" | save -a $name 
+	chmod u+x $name
+	nvim $name
+}
+
+# create a launcher script (can be find with alt+shift+A)
+def "main script" [name] {
+	cd ~/sh/scripts	
+	echo "#!/home/fabrice/.cargo/bin/nu" | save $name 
+	chmod u+x $name
+	nvim $name
+}
+
+# create a zellij layout file
+def "main layout" [name] {
+	cd ~/sh/layout	
+	nvim $"($name).kdl"
+}
+
+# create a variable file (file of data)
+def "main variable" [
+	name: string,
+	--extension: string = ".toml" # choos a file type according to the extension
+] {
 	cd ~/sh/variables/
-	touch $2
-	vim $2
-else
-	if [ -z $2 ]; then
-		vim ~/sh/$1	
-	else
-		echo "alias $1='$2'"
+	nvim $"($name).($extension)"
+}
 
-		echo "Est-ce que cela vous convient? [y/n]"
-		read ok
-
-		if [ "$ok" = "y" ]; then
-			echo "alias $1='$2'" >> ~/.bashrc
-			. ~/.bashrc
-		fi
-	fi
-fi
+def main [cmd?: string] {
+	if $cmd == null {
+		cd ~/sh/	
+		let file = (fzf)
+		nvim $file
+		cd
+	} else {
+		nvim $"/home/fabrice/sh/($cmd)"
+	}
+}
+#!/home/fabrice/.cargo/bin/nu

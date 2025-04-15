@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xrandr --delmode --output HDMI-A-0 
+xrandr --output eDP 

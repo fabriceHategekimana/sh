@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [ "$1" == "it" ]; then
 	#. ~/sh/push
 	shutdown now
@@ -9,4 +8,3 @@ elif [ "$1" == "reboot" ]; then
 else
 	sudo systemctl suspend
 fi
-#!bin/bash

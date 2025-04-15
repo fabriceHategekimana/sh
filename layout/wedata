@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s wedata -n notebook
-tmux send-keys -t wedata 'nvim /home/fabrice/sessions/projet/wedata/note.md' Enter

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ "$1" == "general" ]; then
 	cd ~/rendu
 	import ~/rendu/$(python ~/python/number.py $(ls images | wc -l)).png

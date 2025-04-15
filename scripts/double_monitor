@@ -1,3 +1,0 @@
-#!/bin/bash
-#xrandr --output eDP --output HDMI-A-0 --left-of eDP
-xrandr --output eDP --output DVI-I-1-1 --auto --right-of eDP --output DVI-I-2-2 --auto --left-of eDP

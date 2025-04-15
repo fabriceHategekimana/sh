@@ -1,0 +1,6 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def	main [date_info: string] -> string {
+	http post --headers ["Contet-Type" "application/json"] --content-type application/json http://localhost:1234/v1/chat/completions { messages: [ {"role": "user", "content": $"($date_info)"} ], "model": "local-model", "temperature": 0.7 } |
+	$in.choices.message.content.0
+}

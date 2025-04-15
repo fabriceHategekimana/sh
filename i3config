@@ -1,2 +1,3 @@
 #!/bin/bash
+
 vim ~/.config/i3/src/config

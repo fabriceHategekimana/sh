@@ -1,0 +1,38 @@
+#!/home/fabrice/.cargo/bin/nu
+
+let path = "/home/fabrice/python/miniature/"
+
+# miniature manager
+def main [] {
+
+}
+
+# Generate a miniature from the given json file
+def "main run" [file_name: string] {
+	python3 $"/home/fabrice/python/miniature/miniature.py" $file_name
+	feh ($file_name | str replace ".json" ".jpg")
+}
+
+def write_content [name: string] {
+	echo $"{
+	\"file_name\": \"($name)\",
+	\"logo\": \"none\",
+	\"title\": \"none\",
+	\"subtitle\": \"none\",
+	\"color\": \"none\"
+	}" | save $"($name).json"
+}
+
+# create a new miniature 
+def "main new" [
+	name: string # name of the miniature
+] {
+	cd $path
+	if ("*.jpg" | path exists) {
+		mv *.jpg images 
+	}
+	if ("*.json" | path exists) {
+		mv *.json json
+	}
+	write_content $name
+}

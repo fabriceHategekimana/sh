@@ -1,0 +1,69 @@
+#!/home/fabrice/.cargo/bin/nu
+
+# Fonction pour convertir les titres
+def convert_titles [input: string] {
+    $input | lines | each {|line|
+        if $line =~ "^(#+) (.+)" {
+            let level = ($line.0 | length)
+            let title = $line.1
+            "#[$title]($level)"
+        } else {
+            $line
+        }
+    } | str join "\n"
+}
+
+# Fonction pour convertir les listes
+def convert_lists [input: string] {
+    $input | lines | each {|line|
+        if $line =~ "^( *)([-*+]) (.+)" {
+            let indent = $line.0
+            let marker = $line.1
+            let content = $line.2
+            "#{$indent}#{$marker} #{$content}"
+        } else {
+            $line
+        }
+    } | str join "\n"
+}
+
+# Fonction pour convertir les tableaux
+def convert_tables [input: string] {
+    $input | lines | each {|line|
+        if $line =~ "^(\|.+\|)$" {
+            let table_line = $line.0
+            $table_line | str replace "|" " "
+        } else {
+            $line
+        }
+    } | str join "\n"
+}
+
+# Fonction pour convertir les images
+#def convert_images [input: string] {
+#    $input | lines | each {|line|
+#        if $line =~ "^!\[(.+)\]\((.+)\)$" {
+#            let alt = $line.0
+#            let src = $line.1
+#            "#image($src, $alt)"
+#        } else {
+#            $line
+#        }
+#    } | str join "\n"
+#}
+
+# Fonction principale pour convertir le fichier Markdown en Typst
+def convert_markdown_to_typst [input_path: string] {
+    let content = (open $input_path)
+	let output_path = ($input_path | str replace ".md" ".typ")
+    let converted_content = $content
+        | convert_titles
+        | convert_lists
+        | convert_tables
+#| convert_images
+    $converted_content | save --to $output_path
+}
+
+def main [input: string] {
+	convert_markdown_to_typst $input
+}

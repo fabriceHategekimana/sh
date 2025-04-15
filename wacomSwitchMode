@@ -1,5 +1,6 @@
 #!/bin/bash
 #switch absolute relative
+
 if [ "$(xsetwacom get 10 Mode | grep Absolute)" == "Absolute" ]; then
 	#switching to relative
 	for i in $(xsetwacom list devices | grep -e "id: \w\w" -o | sed "s/id: \(\w\w\)/\1/");

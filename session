@@ -1,3 +1,18 @@
-#!/bin/bash
+#!/home/fabrice/.cargo/bin/nu
 
-ln -s $(pwd) ~/sessions/
+def detach [] {
+	xdotool getactivewindow key ctrl+a
+	xdotool getactivewindow key d
+}
+
+def attach [session_name] {
+	$"zellij attach ($session_name)" | xclip -selection clipboard
+	xdotool getactivewindow key ctrl+shift+v
+	xdotool getactivewindow key Return
+}
+
+def main [] {
+	let selected_session = (zellij list-sessions -n | awk -F ' ' '{ print $1 }' | fzf);
+	detach
+	attach $selected_session
+}

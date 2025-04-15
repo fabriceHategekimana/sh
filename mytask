@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ "$1" == "prompt" ]; then
 	text=$(python3 ~/python/dialog.py)
 	task add $text

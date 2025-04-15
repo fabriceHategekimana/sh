@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kitty --class floating vim ~/note/floating_window_notes/log.md

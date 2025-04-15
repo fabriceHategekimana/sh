@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #firefox https://www.youtube.com/ &
 
 query=$(echo $@ | sed -e "s/ /+/g")

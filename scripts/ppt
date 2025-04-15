@@ -1,0 +1,6 @@
+#!/bin/bash
+
+query=$(echo $@ | sed -e "s/ /+/g")
+
+firefox -new-tab https://www.slideshare.net/search?searchfrom=header&q=$query
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://app.diagrams.net/#G1Dnl6MnNi-sbUVb3jj7qpMEqKS8wTSMci#%7B%22pageId%22%3A%22xev0k3J1GCdCukO_NbZk%22%7D &
+

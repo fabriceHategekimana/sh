@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s statistiques -n notebook
-tmux send-keys -t statistiques 'vim /home/fabrice/sessions/projet/statistiques/note.md' Enter

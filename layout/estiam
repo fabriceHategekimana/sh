@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s estiam -n notebook
-tmux send-keys -t estiam 'nvim /home/fabrice/sessions/projet/estiam/note.md' Enter

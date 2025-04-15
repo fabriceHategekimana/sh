@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ "$1" == "images" ]; then
 	nom="$(python3 ~/python/dialog.py).png"
 	import ~/rendu/$nom

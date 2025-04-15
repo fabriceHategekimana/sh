@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mv -f $1 ~/rendu

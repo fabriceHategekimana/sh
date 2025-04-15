@@ -1,24 +1,27 @@
 #!/bin/bash
 
-name=$1
+name=$@
+video=output.mp4
 
 notify-send "création de la vidéo"
 
 mkdir ~/production
 
-cp ~/Vidéos/obs/output.mkv ~/production
-cp ~/Vidéos/wedata/add_group/*.mkv ~/production
-cp ~/Vidéos/wedata/add_group/*.mp4 ~/production
+cp ~/Vidéos/$video ~/production
+cp ~/Vidéos/wedata/add_group/Pub.mkv ~/production
+cp ~/Vidéos/wedata/add_group/Intro.mp4 ~/production
+cp ~/Vidéos/wedata/add_group/Outtro.mp4 ~/production
 cp ~/lmms/projects/Man_of_your_word_extended.mp3 ~/production
 
 cd ~/production
 
-ffmpeg -i Pub.mkv -i Intro.mp4 -i output.mkv -i Man_of_your_word_extended.mp3 -i Outtro.mp4 -filter_complex "[3:a]volume=volume=0.1[music];\
-	[2:a]volume=volume=1.5[voix];\
+ffmpeg -i Intro.mp4 -i $video -i Man_of_your_word_extended.mp3 -i Outtro.mp4 -filter_complex "\
+	[1:a]volume=volume=5[voix];\
+	[2:a]volume=volume=0.0[music];\
+	[3:a]volume=volume=0.2[outro_volume];\
 	[voix][music]amerge=inputs=2[voix_music];\
-	[4:a]volume=volume=0.4[outro_volume];\
-	[0:v][0:a][1:v][1:a][2:v][voix_music][4:v][outro_volume]concat=n=4:v=1:a=1 [v] [a]"\
-   	-map "[v]" -map "[a]" -y ~/rendu/$1.mkv
+	[0:v][0:a][1:v][voix_music][3:v][outro_volume]concat=n=3:v=1:a=1 [v] [a]"\
+   	-map "[v]" -map "[a]" -y ~/rendu/$name.mkv
 
 notify-send "fin de la production de la vidéo"
 

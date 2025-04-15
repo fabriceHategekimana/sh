@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar /home/fabrice/install/AnalyseSI-0.80.jar
+

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 pane=$(tmux list-windows -t hidden -F "#{session_name}:#{window_name}.#{pane_index}" | rofi -dmenu)
 
 tmux move-pane -s $pane -l 10 -v

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+coqtop -q > /home/fabrice/temp/.fabtop 2>&1

@@ -1,3 +1,3 @@
 #!/bin/bash
-firefox -new-tab https://labs.openai.com/ &
+firefox -new-tab https://huggingface.co/spaces/ehristoforu/dalle-3-xl-lora-v2 &
 

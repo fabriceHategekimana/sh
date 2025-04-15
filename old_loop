@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# prend le nom de la vidéo, le nombre de répétitions et éventuellement la coupure de la fin de l'audio (en secondes)
+
+media_name=$1
+loop=$2
+trim=$3
+
+for i in $(seq 1 $loop);
+do
+	echo "file '$media_name'" >> concat.txt
+done
+
+mkdir looptemp
+
+mv $media_name looptemp
+
+# coupe
+ffmpeg -i looptemp/$media_name -t $trim $media_name
+
+# converti
+ffmpeg -f concat -safe 0 -i concat.txt -y -c copy ${media_name%.*}_extended.${media_name##*.}
+
+# rétablir
+rm $media_name concat.txt
+mv looptemp/$media_name .
+rm -r looptemp 

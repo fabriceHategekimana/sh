@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #$1= the name of the class window
 #$2= the name of the key to dend (symkey (not in hexa))
 

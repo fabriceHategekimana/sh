@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s interaction -n notebook
-tmux send-keys -t interaction 'nvim /home/fabrice/sessions/projet/interaction/note.md' Enter

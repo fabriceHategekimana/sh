@@ -1,3 +1,4 @@
 #!/bin/bash
+
 rm -dr /home/fabrice/sessions/projet/$1 2>> ~/corbeille/null || echo "no project directory"
 rm /home/fabrice/sh/layout/$1 2>> ~/corbeille/null || echo "no project layout"

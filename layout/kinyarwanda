@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s kinyarwanda -n notebook
-tmux send-keys -t kinyarwanda 'nvim /home/fabrice/sessions/projet/kinyarwanda/note.md' Enter

@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://claude.ai/chat/6d86f0c7-4945-4613-aa2a-731034cffca3 &
+

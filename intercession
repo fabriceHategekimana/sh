@@ -1,4 +1,5 @@
 #!/bin/bash
+
 sujetsdintercession=~/sh/variables/intercession
 
 if [[ "$1" == "edit" ]]; then

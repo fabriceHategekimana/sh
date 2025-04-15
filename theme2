@@ -1,0 +1,39 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def get_theme [theme] {
+	cat /home/fabrice/themes/templates/$theme
+}
+
+
+def get_color [theme, color] {
+	let index = { "background": 2, "foreground": 3, "leadcolor": 4, "commentcolor": 5, "secondaraycolor": 6, "colorspec": 7, "discretcolor": 8, "yellow": 9, "blue": 10 }
+
+	$theme | sed -n $"($index | get $color)p" | sed -e "s/[^:]\+: \(.\+\)$/\1/"
+}
+
+
+def main [] {
+#selection de thèmes
+	let selected_theme = (ls /home/fabrice/themes/templates/ | rofi -dmenu)
+
+#selectedtheme=red.css
+	let theme = (get_theme $selected_theme)
+
+#background image
+	let backgroundimage = (get_theme $selected_theme 11)
+
+#opacity
+	let opacity = (get_theme $selectedtheme 12)
+
+#lancement des thèmes
+	set_kitty_theme
+	set_feh_theme
+	set_neofetch_theme
+	set_zathura_theme
+	set_i3_theme
+	set_rofi_theme
+	set_vim_theme
+
+	/home/fabrice/sh/scripts/generatei3
+}
+

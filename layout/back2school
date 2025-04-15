@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s back2school -n notebook
-tmux send-keys -t back2school 'vim /home/fabrice/sessions/projet/back2school/note.md' Enter

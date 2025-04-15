@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s buchs -n notebook
-tmux send-keys -t buchs 'nvim /home/fabrice/sessions/projet/buchs/note.md' Enter

@@ -1,3 +1,4 @@
 #!/bin/bash
+
 parolesPath=/home/fabrice/sessions/projet/programme/paroles/
 cp $parolesPath/$(ls $parolesPath | fzf)  .

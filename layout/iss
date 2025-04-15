@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s iss -n notebook
-tmux send-keys -t iss 'nvim /home/fabrice/sessions/projet/iss/note.md' Enter

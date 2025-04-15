@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s cv -n notebook
-tmux send-keys -t cv 'nvim /home/fabrice/sessions/projet/cv/note.md' Enter

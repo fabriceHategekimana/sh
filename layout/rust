@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s rust -n notebook
-tmux send-keys -t rust 'vim /home/fabrice/sessions/projet/rust/note.md' Enter

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-xclip -sel clip /home/fabrice/note/templates/signatureEstiam.md
+#xclip -sel clip /home/fabrice/note/templates/signatureEstiam.md
+xclip -sel clip /home/fabrice/temp/signatureEstiam.txt

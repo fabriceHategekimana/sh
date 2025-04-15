@@ -1,4 +1,4 @@
-i3 /home/fabrice/.config/i3/default
+i3 /home/fabrice/.config/i3/startup
 cava /home/fabrice/.config/cava/config
 zellij /home/fabrice/.config/zellij/config.kdl
 tmux /home/fabrice/.tmux.conf

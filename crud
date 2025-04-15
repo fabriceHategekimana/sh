@@ -1,0 +1,14 @@
+#!/home/fabrice/.cargo/bin/nu
+
+# get a list of element and return the actions and the commands
+# Return: {
+#	action: [create|read|update|delete],
+#	values: [selected_values]
+#}
+def main [
+	elements: string # elements separated by a space like "a b c"
+] -> record<action: string, values: list<string>> {
+	let values = nu --commands $"gum choose --no-limit ($elements)" | split row "\n"
+	let action = gum filter create read update delete
+	{action: $action, values: $values}
+}

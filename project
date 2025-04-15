@@ -1,0 +1,21 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def get_project [] {
+	# prendre la liste des dossiers de projets
+	let folders = (ls -s /home/fabrice/sessions/projet/ | get name | to text)
+	# prendre la liste des sessions
+	let sessions = (zellij list-sessions -n | awk -F ' ' '{ print $1 }')
+	# faire une célebration de la jointure des deux
+	$folders + "\n" + $sessions | ^sort | ^uniq | fzf  
+}
+
+def main [] {
+	let element = (get_project) 
+
+# select one project from the list of projects
+
+# if a corresponding session exist open it
+# else if the project folder exist open the note.md
+# else propose to create a new one
+
+}

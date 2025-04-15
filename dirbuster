@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/bin/bash
+
 cd /home/fabrice/install/dirbuster/
 
 ./DirBuster-1.0-RC1.sh

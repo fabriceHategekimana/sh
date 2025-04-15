@@ -1,1 +1,67 @@
-/home/fabrice/sessions/projet/coq/labs/cli/fabcoq
+#! /bin/python3
+
+# import subprocess
+from cmd import Cmd
+from colorama import Fore, Back, Style
+from functools import reduce
+import os
+
+TARGET_FILE = "/home/fabrice/temp/.fabtop"
+
+
+def get_response():
+    f = open(TARGET_FILE)
+    res = "".join(f.readlines())
+    f.close()
+    return res
+
+
+def ask_coq(command):
+    os.system(f"tmux send-key -t hidden:coqtop \"{command}\" Enter")
+    res = get_response()
+    os.system("echo '' > /home/fabrice/temp/.fabtop")
+    return res
+
+
+def coloration(text, tokens, color):
+    return reduce(lambda acc, x: acc.replace(x, color+x+Style.RESET_ALL),
+                  tokens, text)
+
+
+class MyPrompt(Cmd):
+    # defining variables for i in  the display
+    logo = ""+"|"
+    prompt = logo+Fore.YELLOW+"Coq"+Style.RESET_ALL+"> "
+    intro = "Coq Wrapper!"
+    use_raw_input = False
+    mode = "normal"
+    COMPLETIONLIST = []
+
+    def __init__(self):
+        super(MyPrompt, self).__init__()
+        os.system("tmux kill-window -t hidden:coqtop")
+        cmd = "tmux new-window -t hidden -n coqtop 'coqtopback'"
+        os.system(cmd)
+        print(get_response())
+
+    def default(self, inp):
+        if inp == "Quit.":
+            return self.do_exit("")
+        result = ask_coq(inp)
+        result = self.format_color(result)
+        print(result)
+
+    def do_exit(self, inp):
+        os.system("tmux kill-window -t hidden:coqtop")
+        return True
+
+    def format_color(self, result):
+        result = coloration(result, ["=", ":", "<", ">", "-", "|"], Fore.BLUE)
+        result = coloration(result, ["Prop", "nat", "Type", "bool"], Fore.GREEN)
+        result = coloration(result, ["Coq"], Fore.YELLOW)
+        result = coloration(result, ["Error"], Fore.BLACK+Back.WHITE)
+        result = coloration(result, ["^"], Fore.WHITE)
+        return result
+
+
+MyPrompt().cmdloop()

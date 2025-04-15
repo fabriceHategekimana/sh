@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://colab.research.google.com/?hl=fr &
+

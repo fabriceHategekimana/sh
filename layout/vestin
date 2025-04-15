@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s vestin -n notebook
-tmux send-keys -t vestin 'vim /home/fabrice/sessions/projet/vestin/note.md' Enter

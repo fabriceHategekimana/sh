@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ "$1" == "plus" ]; then
 	infos=$(pacmd list-sinks | grep "volume: front-left")
 	res=$(python3 -c "print(int('$infos'.split('/')[0].split(':')[2])+5000)")

@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://twitter.com/home?lang=fr &
+

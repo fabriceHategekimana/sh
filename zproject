@@ -1,0 +1,11 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [] {
+	let projects = (ls /home/fabrice/sessions/projet/ | get name | each { |x| $x | str replace "/home/fabrice/sessions/projet/" "" } | to text);
+
+	let selected_project = ($projects | rofi -dmenu);
+	
+# launch the layout
+	zellij --layout $"/home/fabrice/sessions/projet/($selected_project)/layout.kdl";
+}
+

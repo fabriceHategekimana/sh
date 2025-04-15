@@ -1,4 +1,5 @@
 #!/bin/bash
+
 mkdir $1
 mv * $1
 mv $1 /home/fabrice/sessions/saved/

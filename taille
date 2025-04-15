@@ -1,0 +1,3 @@
+#!/home/fabrice/.cargo/bin/nu
+
+ls | get name | each {|x| { name: $x, size: (du $x | get physical) } } | filter {|x| ($x.size | length) > 0 } | each {|x| { name: $x.name, size: ($x.size | first) } } | sort-by  size

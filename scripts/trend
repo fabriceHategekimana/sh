@@ -1,3 +1,5 @@
 #!/bin/bash
-firefox -new-tab https://trends.google.com/trends/?geo=CH &
 
+query=$(echo $@ | sed -e "s/ / /g")
+
+firefox "https://trends.google.fr/trends/explore?q=$query" &

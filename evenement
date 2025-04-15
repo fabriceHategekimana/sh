@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 date=$(python3 ~/python/calendar.py)
 
 task add $@ due:$date

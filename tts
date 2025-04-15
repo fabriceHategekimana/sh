@@ -1,4 +1,5 @@
 #!/bin/bash
+
 firefox -new-window https://azure.microsoft.com/en-us/services/cognitive-services/text-to-speech/#features
 sleep 6
 text=$(cat $1)

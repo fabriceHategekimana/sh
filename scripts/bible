@@ -1,0 +1,3 @@
+#!/bin/bash
+firefox -new-tab https://character.ai/chat/5C4mM3wwA0OLpXiAqtyiWQOsLfQda0Mvno9cPvsk-30 &
+

@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s christ -n notebook
-tmux send-keys -t christ 'nvim /home/fabrice/sessions/projet/christ/note.md' Enter

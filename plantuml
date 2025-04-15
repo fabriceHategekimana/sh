@@ -1,0 +1,7 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [puml_file] {
+	java -jar /home/fabrice/install/plantuml.jar $puml_file
+}
+
+

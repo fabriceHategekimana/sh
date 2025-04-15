@@ -1,0 +1,166 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def my_crud [
+	elements: string # elements separated by a space like "a b c"
+] -> record<action: string, values: list<string>> {
+	let values = nu --commands $"gum choose --no-limit ($elements)" | split row "\n"
+	let action = gum filter create read update delete
+	{action: $action, values: $values}
+}
+
+
+def	get_multiplexer [] {
+	if ($env | get -i TMUX) != null {
+		"tmux"
+	} else if ($env | get -i ZELLIJ ) != null {
+		"zellij"
+	} else {
+		"none"
+	}
+}
+
+def my_exec [command: string] {
+	nu --commands $command	
+}
+
+# PAIN------------------
+
+# pane manager
+# add the "new --help" to see more options 
+def "main pane" [] {
+}
+
+def zellij_new_pane [direction: string, command: string, fixed: bool] {
+	if $command == "" {
+	zellij action new-pane --direction $direction
+	} else {
+		if $fixed {
+			my_exec $"zellij action new-pane --direction ($direction) -- ($command)"
+		} else {
+			my_exec $"zellij action new-pane --direction ($direction) -c -- ($command)"
+		}
+	}	
+}
+
+def tmux_new_pane [position: string, command: string, fixed: bool] {
+	# can't keep a term alive
+	match [$position, $fixed] {
+		["up", true] => (tmux split -v $"($command) | nvim"),
+		["down", true] => (tmux split -v $"($command) | nvim"),
+		["right", true] => (tmux split -h $"($command) | nvim"),
+		["left", true] => (tmux split -h $"($command) | nvim"),
+		["up", false] => (tmux split -v $command),
+		["down", false] => (tmux split -v $command),
+		["right", false] => (tmux split -h $command),
+		["left", false] => (tmux split -h $command)
+	}	
+}
+
+def "main pane new" [
+	--position: string = "down", # opening position
+	--command: string = "", # extra command
+	--fixed
+] {
+	match (get_multiplexer) {
+		"tmux" => (tmux_new_pane $position $command $fixed),
+		"zellij" => (zellij_new_pane $position $command $fixed),
+		"none" => (print "no multiplexer present")
+	}
+}
+
+
+# WINDOW------------------
+
+def zellij_rename_window [name: string] {
+	zellij action go-to-tab-name $name
+	let new_name = (gum input)
+	zellij action rename-tab $new_name
+	zellij action go-to-previous-tab
+}
+
+def zellij_manage_window [] {
+	let res = (my_crud (zellij action query-tab-names | str replace --all "\n" " "))
+		match $res.action {
+			"delete" => ($res.values | each {|name| (zellij action go-to-tab-name $name; zellij action close-tab)}),
+			"update" => ($res.values | each {|name| zellij_rename_window $name}),
+			"read" => (zellij action go-to-tab-name ($res.values[0])),
+			"create" => ()
+		}
+}
+
+# window manager
+def "main window" [] { 
+	match (get_multiplexer)	 {
+		"tmux" => (),
+		"zellij" => (zellij_manage_window)
+	}
+}
+
+def zellij_new_window [command: string] {
+	if $command == "" {
+		my_exec "zellij action new-tab"
+	} else {
+		my_exec $"zellij action new-tab -- ($command)"
+	}
+}
+
+def tmux_new_window [command: string, fixed?: bool = false] {
+	if $command == "" {
+		tmux new-window
+	} else {
+		if $fixed {
+			tmux new-window $"($command) | nvim"
+		} else {
+			tmux new-window $command
+		}
+	}
+}
+
+def "main window new" [
+	--command: string = "" # extra command
+] {
+	match (get_multiplexer) {
+		"tmux" => (tmux_new_window $command),
+		"zellij" => (zellij_new_window $command)
+	}
+}
+
+# SESSION------------------
+
+# session manager
+def "main session" [] { }
+
+# FLOATING------------------
+
+# floating pane manager
+def "main floating" [] {
+}
+
+def zellij_new_floating [command: string, fixed: bool] {
+	if $command == "" {
+	zellij action new-pane --floating
+	} else {
+		if $fixed {
+		 my_exec $"zellij action new-pane --floating -- ($command)"
+		} else {
+		 my_exec $"zellij action new-pane  --floating -c -- ($command)"
+		}
+	}	
+}
+
+# floating pane manager
+def "main floating new" [
+	--command: string = "" # extra command
+	--fixed # define if the pane stay after the execution
+] {
+	match (get_multiplexer) {
+		"tmux"	=> (tmux_new_window $command $fixed),
+		"zellij" => (zellij_new_floating $command $fixed),
+	}
+}
+
+# generalized multiplexer manager
+def main [] {
+	
+
+}

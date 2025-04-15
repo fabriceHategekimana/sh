@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s satom -n notebook
-tmux send-keys -t satom 'nvim /home/fabrice/sessions/projet/satom/note.md' Enter

@@ -1,0 +1,1 @@
+command! New !make new

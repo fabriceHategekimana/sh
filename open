@@ -1,4 +1,5 @@
 #!/bin/bash
+
 :'
 OPEN
 open(string) -> void

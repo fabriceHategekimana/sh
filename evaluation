@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nu /home/fabrice/sh/evaluation_module/evaluation.nu $@

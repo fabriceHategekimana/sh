@@ -1,0 +1,111 @@
+#! /usr/bin/python3
+import pandas as pd
+import sys
+
+# FORMAT
+# Quels deux dispositifs seraient décrits comme des dispositifs intermédiaires ? (Choisissez deux propositions.)
+# - Contrôleur LAN sans fil
+# - IPS
+# - serveur
+# - Console de jeux
+# - scanner de vente au détail
+# Réponse: 1,2
+
+def target_over_4(answer: str) -> bool:
+    answers = answer.split(",")
+    return any([int(an) > 4 for an in answers])
+
+
+def choice_under_4(choices):
+    return len(choices) < 4
+
+
+def checking(qid, question, choices, answer):
+    if target_over_4(answer):
+        raise Exception(f"Error in question {qid}: The correct response is higher that 4: {question[:25]}...") 
+    if choice_under_4(choices):
+        raise Exception(f"Error in question {qid}: too few choices: {question[:25]}...") 
+    if len(question) > 120:
+        raise Exception(f"Error in question {qid}: The title is too long: (here it's {len(question)} > 120) '{question[:20]}...'")
+    for choice in choices:
+        if len(choice) > 75:
+            raise Exception(f"Error in question {qid}: The possible choice is too long: (here it's {len(choice)} > 75) '{choice[:20]}...'")
+
+
+def safe_get(liste, index):
+    if index > (len(liste) - 1):
+        return None
+    return liste[index]
+
+
+def text_to_csv(input_text_tuple):
+    qid, input_text = input_text_tuple
+    lines = input_text.split("\n")
+    # print("qid:", qid)
+    # print("lines:", lines)
+    question = lines[0]  # Remove the backtick and leading whitespace
+    choices = [choice.strip("- ") for choice in lines[1:-2]]  # Extract choices
+    answer = lines[-2].split(": ")[1]  # Extract the answer
+    checking(qid, question, choices, answer)
+
+    # Combine the data into a dictionary
+    data = {
+        "Id": qid+1,
+        "Question Text": question,
+        "Answer 1": choices[0],
+        "Answer 2": choices[1],
+        "Answer 3": choices[2],
+        "Answer 4": choices[3],
+        "Time Limit": "20",
+        "Correct Answer(s)": f"\"{answer}\""
+    }
+
+    return data
+
+
+def write_datas(datas):
+    header = '''"Blooket
+Import Template",Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7
+Id #,Question Text,Answer 1,Answer 2,"Answer 3
+(Optional)","Answer 4
+(Optional)","Time Limit (sec)
+(Max: 300 seconds)","Correct Answer(s)
+(Only include Answer #)"
+'''
+    # Open a file in write mode.
+    with open('output.csv', 'w') as f:
+        f.write(header) # Add a new line
+        for row in datas:
+            # Write the values in a row.
+            f.write(','.join(str(x) for x in row.values()))
+            f.write('\n') # Add a new line
+
+
+def import_questionnaire(filename):
+    f = open(filename)
+    lines = [line.replace("\n", "").replace("\"", "'") for line in f.readlines()]
+    f.close()
+    res = []
+    bloc = ""
+    for line in lines:
+        if line == "":
+            res.append(bloc)
+            bloc = ""
+        else:
+            bloc += line + "\n"
+    return res
+
+
+def convert_csv_to_xlsx():
+    df = pd.read_csv('output.csv')
+    df.to_excel('output.xlsx', index=False)
+
+
+def main(filename):
+    questions = import_questionnaire(filename)
+    datas = [text_to_csv(x) for x in enumerate(questions)]
+    write_datas(datas)
+    convert_csv_to_xlsx()
+
+
+main(sys.argv[1])

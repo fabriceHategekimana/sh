@@ -1,0 +1,13 @@
+#!/home/fabrice/.cargo/bin/nu
+
+
+def main [name: string] {
+	# Création du projet
+	mkdir $name	
+	cd $name
+	mkdir Data Graph Script Table	
+
+	# création du script de nettoyage
+	cd Script
+	touch Nettoyage.R
+}

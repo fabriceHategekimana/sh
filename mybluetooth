@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [ "$1" == "pairing"  ]; then
 	shift
 	SELECTEDDEVICE=$(bluetoothctl devices | sed -e "s/Device \w\w:\w\w:\w\w:\w\w:\w\w:\w\w \(.*\)$/\1/" | rofi -dmenu | sed -e "s/\([^\s]\)\s$/\1/")

@@ -1,0 +1,179 @@
+#!/home/fabrice/.cargo/bin/nu
+# revisions generator
+# generate revision files
+
+def get_base_name [file_name: string] {
+	$file_name | split row "." | get 0
+}
+
+def	write_header [metadata, base_name] {
+	echo $"
+#import \"@preview/dvdtyp:1.0.0\": *
+#import \"@preview/dashy-todo:0.0.2\": todo
+
+#show: dvdtyp.with\(
+  title: \"($metadata.title.0)\",
+  subtitle: ($metadata.subtitle),
+  author: \"Fabrice Hategekimana\",
+  abstract: \"-\"\)
+" | save -f $"($base_name).typ"
+}
+
+def write_component [component] {
+	if $component.type == "image" {
+		echo $"
+#image\(\"($component.body)\"\)"
+	} else {
+		echo $"
+#($component.type)\(\"($component.title)\"\)[
+($component.body)
+]
+"
+	}
+}
+
+def write_section [section, base_name] {
+	$section | each {|component| write_component $component | save -fa $"($base_name).typ"}
+}
+
+def get_columns [data] {
+	$data | columns | reverse | drop | reverse
+}
+
+def write_body [data, base_name] {
+	let columns = get_columns $data
+	$columns | each {|column| write_section ($data | get $column) $base_name}
+}
+
+# main command: take a toml file and build the Typst file
+def	main [file_name?: string] {
+	let file_name = get_file $file_name
+	let data = open $file_name
+	let base_name = get_base_name $file_name
+	write_header $data.metadata $base_name
+	write_body $data $base_name
+	quarto typst compile $"($base_name).typ"
+}
+
+# Initialise a basic Toml file for the rendering
+def "main init" [file_name: string] {
+	echo "
+# type: Definition, Example, Image
+[[metadata]]
+title = \"FileTitle\"
+subtitle = \"FileSubtitle\"
+
+[[SectionName]]
+type = \"definition\"
+title = \"Title1\"
+body = \"...\"
+
+[[SectionName]]
+type = \"example\"
+title = \"Title2\"
+body = \"...\"
+" | save -f $"($file_name).toml"
+}
+
+def get_component [data, column: string] {
+	let components = $data | get $column
+	choice $components
+}
+
+def my_display [content: string] {
+	print $content
+#gum style --foreground="2" $"($content)"
+}
+
+def ask_question [component] -> bool {
+	my_display $component.body
+	let response = (input)
+	if $response == $component.title {
+		gum style --foreground="46" "Bien joué !"
+		true
+	} else {
+		gum style --foreground="7" "Faux !"
+		print "La réponse est:"
+		gum style --foreground="3" $component.title
+		false
+	}
+}
+
+def get_scores [data] -> string {
+	let scores = if ($data | columns | any {|x| $x == score}) {
+		$data | get score 
+	} else { 
+		let len = (ls | length);
+		generate {|i| if ($i < $len) { {out: 1, next: ($i + 1)} }} 0	
+	}
+	if ($scores | all {|x| $x == 0}) {
+		print "zone cleared !"
+		exit
+	}
+	let scores = $scores | reduce --fold "" {|it, acc| $acc + " " + ($it | into string)}
+	$scores | str substring 1..-1
+}
+
+def get_score [component] {
+	if ($component | columns | any {|x| $x == score}) {
+		$component.score
+	} else { 1 }
+}
+
+def random_choice [data] {
+	let scores_str = get_scores $data
+	let index = (python3 /home/fabrice/sh/modules/choice_module/selection.py $scores_str | into int)
+	let component = $data | get $index
+	{index: $index, component: $component}
+}
+
+def get_data [file_name] {
+	open $file_name | get Data
+}
+
+def update_result [succeeded: bool, index_component, data, file_name] {
+	let old_score = (get_score $index_component.component) | into int
+	let val = if $succeeded { -1 } else { 1 }
+	let index = $index_component.index
+	let component = $index_component.component | upsert score ($old_score + $val)
+	let data = $data | update $index $component
+	open $file_name | update Data $data | save -f $file_name
+}
+
+def get_file [file_name] {
+	if ($file_name == null) {
+		ls *.toml | get name | input list	
+	} else {
+		let res = if ($file_name =~ ".toml") {
+			$file_name
+		} else {
+			$"($file_name).toml"
+		};
+		if ($res | path exists) {
+			$res	
+		} else {
+			ls *.toml | input list	
+		}
+	}
+}
+
+# test content of the toml file
+def "main test" [file_name?: string] {
+	let file_name = get_file $file_name
+	loop {
+		print "------------------------------"
+		let data = get_data $file_name
+		let index_component = random_choice $data
+		let result = ask_question $index_component.component
+		update_result $result $index_component $data $file_name
+		print "------------------------------"
+	}
+}
+
+def "main open" [file_name?: string] {
+	zathura (get_file $file_name | str replace ".toml" ".pdf")
+}
+
+def "main edit" [file_name?: string] {
+	nvim (get_file $file_name)
+}

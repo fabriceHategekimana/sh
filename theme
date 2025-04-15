@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source ~/sh/theme_module/kitty_theme
 source ~/sh/theme_module/feh_theme
 source ~/sh/theme_module/i3_theme

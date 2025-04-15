@@ -1,0 +1,33 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def get_aliases [] {
+# ouvre le fichier d'alias	"type.toml" [type alias]
+	open type.toml | get type
+}
+
+def to_alias [file: string] {
+	let content = (open $file | to text)
+	get_aliases | reduce --fold $content {|acc, alias| $acc | str replace ($alias | last) ($alias | first)}
+}
+
+def to_type [file: string] {
+	let content = (open $file | to text)
+	get_aliases | reduce --fold $content {|acc, alias| $acc | str replace ($alias | first) ($alias | last)}
+}
+
+def "main dev" [] {
+# remplace type -> alias
+	ls *.nu | each {|file| open to_alias $file | save -f $file}
+	echo "Dev mode !"
+}
+
+def "main normal" [] {
+# remplace alias -> type
+	let aliases = (get_aliases)
+	ls *.nu | get name | each {|file| to_type $file | save -f $file}
+	echo "Normal mode!"
+}
+
+def main [] {
+	
+}

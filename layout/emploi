@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s emploi -n notebook
-tmux send-keys -t emploi 'nvim /home/fabrice/sessions/projet/emploi/note.md' Enter

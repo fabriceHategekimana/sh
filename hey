@@ -1,0 +1,22 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def is_nu_script [name: string] {
+	grep ".cargo/bin/nu" $name | $in =~ ".cargo/bin/nu"
+}
+
+# Custom documentation for commands
+def main [script_name: string] {
+	let name = $"/home/fabrice/sh/($script_name)"
+	if (is_nu_script $name) {
+		nu --commands $"source ($name); help main"
+	} else {
+		echo $"The script ($name) isn't a nu script"
+	}
+}
+
+# List the set of script in sh
+def "main ls" [] {
+	cd ~/sh/
+	let file = (ls | where type == file | get name | to text | fzf)
+	main $file
+}

@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s coq -n notebook
-tmux send-keys -t coq 'nvim /home/fabrice/sessions/projet/coq/note.md' Enter

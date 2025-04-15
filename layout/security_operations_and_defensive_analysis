@@ -1,3 +1,0 @@
-#!/bin/bash
-tmux new-session -d -s security_operations_and_defensive_analysis -n notebook
-tmux send-keys -t security_operations_and_defensive_analysis 'vim /home/fabrice/sessions/projet/security_operations_and_defensive_analysis/note.md' Enter

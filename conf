@@ -1,0 +1,5 @@
+#!/home/fabrice/.cargo/bin/nu
+
+def main [] {
+	nvim /home/fabrice/vim_plugins/.vimrc
+}

@@ -1,6 +1,5 @@
 #!/home/fabrice/.cargo/bin/nu
 
-
 def to_list [record] {
 	let rec_to_list2 = {|key, value| 
 			[$key, ($value | into string)]

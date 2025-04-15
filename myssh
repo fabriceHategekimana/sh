@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd ~/.ssh
 rm id_rsa id_rsa.pub
 if [ "$1" == "uni" ]; then

@@ -1,0 +1,28 @@
+#!/bin/python3
+
+import sys
+
+def python(param1, param2):
+    param2_elements = param2.split()
+
+    if len(param2_elements) > 1:
+        file, num = param2_elements[1].split(":")
+        return f"{num.replace(',','')} {file}"
+    else:
+        return None
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python script.py param1 param2")
+        sys.exit(1)
+
+    param1 = sys.argv[1]
+    param2 = sys.argv[2]
+
+    if param1 == "python":
+        result = python(param1, param2)
+    else:
+        result = "None"
+
+    print(f"{result}")
